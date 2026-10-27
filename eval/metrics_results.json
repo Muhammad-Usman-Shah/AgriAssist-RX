@@ -1,0 +1,70 @@
+{
+  "evaluation_status": "provisional",
+  "number_of_questions": 3,
+  "relevant_label": 2,
+  "methods": {
+    "dense": {
+      "hit_at_3": 1.0,
+      "mrr": 0.6666666666666666,
+      "questions": [
+        {
+          "question_id": "Q01",
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "question_id": "Q02",
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5
+        },
+        {
+          "question_id": "Q03",
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5
+        }
+      ]
+    },
+    "bm25": {
+      "hit_at_3": 0.6666666666666666,
+      "mrr": 0.5,
+      "questions": [
+        {
+          "question_id": "Q01",
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "question_id": "Q02",
+          "hit_at_3": 0,
+          "reciprocal_rank": 0.0
+        },
+        {
+          "question_id": "Q03",
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.5
+        }
+      ]
+    },
+    "hybrid": {
+      "hit_at_3": 1.0,
+      "mrr": 0.7777777777777777,
+      "questions": [
+        {
+          "question_id": "Q01",
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0
+        },
+        {
+          "question_id": "Q02",
+          "hit_at_3": 1,
+          "reciprocal_rank": 0.3333333333333333
+        },
+        {
+          "question_id": "Q03",
+          "hit_at_3": 1,
+          "reciprocal_rank": 1.0
+        }
+      ]
+    }
+  }
+}

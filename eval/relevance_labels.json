@@ -1,0 +1,33 @@
+
+{
+    "label_definition": {
+      "0": "Not relevant",
+      "1": "Partially relevant",
+      "2": "Directly relevant"
+    },
+    "review_status": "provisional",
+    "questions": {
+      "Q01": {
+        "Rust_Diseases_National.pdf_p1_c1": 2,
+        "Stem_Rust_Man_National.pdf_p1_c1": 2,
+        "Stem_Rust_Man_National.pdf_p5_c1": 1
+      },
+      "Q02": {
+        "Stem_Rust_Man_National.pdf_p1_c1": 1,
+        "Stem_Rust_Man_National.pdf_p1_c2": 2,
+        "Stem_Rust_Man_National.pdf_p5_c1": 0,
+        "Stem_Rust_Man_National.pdf_p3_c1": 1
+      },
+      "Q03": {
+        "wheat_rust.pdf.pdf_p15_c1": 1,
+        "wheat_rust.pdf.pdf_p2_c1": 1,
+        "wheat_rust.pdf.pdf_p5_c1": 1,
+        "Stem_Rust_Man_National.pdf_p1_c2": 2,
+        "Stem_Rust_Man_National.pdf_p2_c1": 2,
+        "Stem_Rust_Man_National.pdf_p2_c2": 2,
+        "Stem_Rust_Man_National.pdf_p5_c1": 1,
+        "Stem_Rust_Man_National.pdf_p6_c1": 2
+      }
+    }
+  }
+  

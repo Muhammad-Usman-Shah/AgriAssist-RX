@@ -1,0 +1,19 @@
+
+[
+    {
+      "id": "Q01",
+      "question": "What is wheat rust disease?",
+      "topic": "disease_definition"
+    },
+    {
+      "id": "Q02",
+      "question": "How does wheat rust spread?",
+      "topic": "disease_transmission"
+    },
+    {
+      "id": "Q03",
+      "question": "How can wheat rust be controlled?",
+      "topic": "disease_management"
+    }
+  ]
+  
