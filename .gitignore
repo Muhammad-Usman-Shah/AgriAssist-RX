@@ -218,3 +218,23 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Python environment
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# API keys
+.env
+.env.*
+
+# Generated RAG files
+data/chroma_db/
+data/processed/
+data/raw_pdfs/
+
+# Trained models
+*.pt
+*.pth
+*.onnx
