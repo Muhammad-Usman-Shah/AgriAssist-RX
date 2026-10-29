@@ -1,0 +1,154 @@
+
+[
+    {
+      "id": "R01",
+      "question": "What are the symptoms of wheat stem rust?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R02",
+      "question": "How does temperature affect wheat rust?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R03",
+      "question": "How does rainfall influence wheat rust disease?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R04",
+      "question": "How does wheat stem rust spread?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R05",
+      "question": "Why are resistant wheat varieties important?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R06",
+      "question": "Can foliar fungicides help control wheat stem rust?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R07",
+      "question": "What causes wheat rust disease?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R08",
+      "question": "What are the differences between leaf rust and stem rust?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R09",
+      "question": "Why does humidity influence fungal crop diseases?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "R10",
+      "question": "How can farmers recognize wheat rust in the field?",
+      "expected_tool": "rag"
+    },
+    {
+      "id": "W01",
+      "question": "What is the temperature in Lahore?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W02",
+      "question": "What is the humidity in Islamabad today?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W03",
+      "question": "What is the current weather in Multan?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W04",
+      "question": "Is it raining in Karachi right now?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W05",
+      "question": "What is the current wind speed in Quetta?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W06",
+      "question": "How hot is it in Faisalabad today?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W07",
+      "question": "What is the present temperature in Peshawar?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W08",
+      "question": "What is the current precipitation in Sukkur?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W09",
+      "question": "How humid is it in Hyderabad today?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "W10",
+      "question": "What are the current weather conditions in Bahawalpur?",
+      "expected_tool": "weather"
+    },
+    {
+      "id": "U01",
+      "question": "What is today's wheat market price in Pakistan?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U02",
+      "question": "What is the capital of France?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U03",
+      "question": "What is the current Bitcoin price?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U04",
+      "question": "Can you diagnose this cotton leaf from a photograph I have not uploaded?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U05",
+      "question": "What is today's wheat procurement announcement from the government?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U06",
+      "question": "What is the exact legally approved pesticide dosage in Punjab for 2026?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U07",
+      "question": "What is the weather forecast for Lahore next month?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U08",
+      "question": "Calculate the fertilizer cost for 5 acres using a current market price you have not been given.",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U09",
+      "question": "What is the latest agricultural policy announced today?",
+      "expected_tool": "unsupported"
+    },
+    {
+      "id": "U10",
+      "question": "Compare yesterday's weather in Lahore with today's wheat market price.",
+      "expected_tool": "unsupported"
+    }
+  ]
+  
