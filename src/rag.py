@@ -63,7 +63,7 @@ client = genai.Client(api_key=API_KEY)
 # STEP 3: Retrieve agricultural evidence
 # ==========================================
 
-def retrieve_evidence(question, top_k=3):
+def retrieve_evidence(question, top_k=5):
 
     results = retriever.hybrid_search(
         question,

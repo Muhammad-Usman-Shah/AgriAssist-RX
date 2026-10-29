@@ -1,0 +1,213 @@
+{
+  "summary": {
+    "retrieval_top_k": 5,
+    "total_questions": 10,
+    "completed_requests": 10,
+    "failed_requests": 0,
+    "correct_behavior": 10,
+    "behavior_accuracy": 1.0,
+    "overall_behavior_success_rate": 1.0,
+    "note": "Behavior accuracy measures agreement between expected and actual answer/refusal decisions. It does not measure factual correctness or citation accuracy."
+  },
+  "results": [
+    {
+      "id": "Q01",
+      "question": "What is wheat rust disease?",
+      "expected_supported": true,
+      "actual_supported": true,
+      "behavior_correct": true,
+      "answer": "Wheat rust diseases are a complex of three distinct cereal diseases\u2014stem rust, leaf rust, and stripe rust\u2014that can significantly reduce wheat and barley grain production. These diseases are caused by fungi that can reproduce rapidly and, over time, develop new genetic variants (races) capable of overcoming the resistance of previously resistant crop varieties. Among these, stem rust is often considered the most damaging as it can infect the leaves, stems, and heads of the plant, potentially causing severe yield loss, especially if infection occurs before the heading stage.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        },
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        }
+      ],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q02",
+      "question": "How does wheat rust spread?",
+      "expected_supported": true,
+      "actual_supported": true,
+      "behavior_correct": true,
+      "answer": "Wheat rust fungi, specifically stem rust, spread primarily via wind, which facilitates the rapid movement of the fungus across large geographical regions. The disease often survives the winter in warmer southern climates and is subsequently moved north by weather systems. Additionally, the isolation of wheat and barley fields can influence the speed of disease spread between regions, while the use of fungicides may help to slow its regional progression.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 3,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p3_c1"
+        }
+      ],
+      "status": "completed",
+      "attempts": 3
+    },
+    {
+      "id": "Q03",
+      "question": "What are the symptoms of wheat stem rust?",
+      "expected_supported": true,
+      "actual_supported": true,
+      "behavior_correct": true,
+      "answer": "Stem rust in wheat is characterized by elongated or oval-shaped, blister-like lesions. These lesions contain orange-red spores that rupture through the plant's outer tissue, leaving a tattered appearance at the margins. The disease can infect the stems, leaves, leaf sheaths, and heads of the plant. A key diagnostic feature for distinguishing it from other rusts is its ability to infect the stem, whereas other rusts typically do not. In severe cases, infection can lead to lodging in the plants.",
+      "sources": [
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        }
+      ],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q04",
+      "question": "Why are resistant wheat varieties important?",
+      "expected_supported": true,
+      "actual_supported": true,
+      "behavior_correct": true,
+      "answer": "Resistant wheat varieties are important because they serve as an effective means of managing rust diseases, which are widespread and economically significant. By incorporating genetic resistance, these varieties help protect grain production from yield losses. Furthermore, utilizing varieties with diverse sources of resistance helps mitigate the risk of fungal races overcoming the resistance of all crops on a farm simultaneously.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c1"
+        }
+      ],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q05",
+      "question": "Can foliar fungicides help manage stem rust?",
+      "expected_supported": true,
+      "actual_supported": true,
+      "behavior_correct": true,
+      "answer": "Yes, foliar fungicides can effectively manage stem rust and reduce potential yield losses in North America. Research indicates that many widely marketed fungicides provide good to excellent control of the disease. For the best results, application should be timed between flag leaf emergence and flowering to protect the upper crop canopy. Because most fungicides are locally systemic, good coverage is critical, though standard application equipment is sufficient. In regions with a history of Fusarium head blight, products containing strobilurin fungicides should be avoided after head emergence, as they provide little to no protection against that disease and may worsen associated mycotoxin issues.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 6,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p6_c1"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 7,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p7_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 8,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p8_c1"
+        }
+      ],
+      "status": "completed",
+      "attempts": 2
+    },
+    {
+      "id": "Q06",
+      "question": "What is the capital of France?",
+      "expected_supported": false,
+      "actual_supported": false,
+      "behavior_correct": true,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q07",
+      "question": "What exact pesticide dosage is legally recommended for wheat rust in Punjab, Pakistan in 2026?",
+      "expected_supported": false,
+      "actual_supported": false,
+      "behavior_correct": true,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q08",
+      "question": "What is the current temperature in Lahore?",
+      "expected_supported": false,
+      "actual_supported": false,
+      "behavior_correct": true,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q09",
+      "question": "What is today's official wheat market price in Pakistan?",
+      "expected_supported": false,
+      "actual_supported": false,
+      "behavior_correct": true,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "status": "completed",
+      "attempts": 1
+    },
+    {
+      "id": "Q10",
+      "question": "Can you diagnose the disease in my cotton leaf photograph? No photograph has been provided.",
+      "expected_supported": false,
+      "actual_supported": false,
+      "behavior_correct": true,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "status": "completed",
+      "attempts": 1
+    }
+  ]
+}
