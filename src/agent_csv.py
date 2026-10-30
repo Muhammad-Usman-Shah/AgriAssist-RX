@@ -1,19 +1,18 @@
 
 """
 AgriAssist-RX
-Phase 4: Five-Route LangGraph Agent
+Phase 5: Six-Route LangGraph Agent
 
-Available routes:
+Routes:
 1. Agricultural RAG
 2. Live weather
 3. Agricultural calculator
 4. CSV data analysis
-5. Unsupported requests
+5. Wheat image classification
+6. Unsupported requests
 
-CSV column matching has been corrected to:
-- Ignore filenames when detecting columns
-- Match specific column names before general aliases
-- Handle fertilizer cost and wheat yield questions
+Weather, CSV and image routing use local rules.
+Other requests use the existing Gemini router.
 """
 
 import re
@@ -33,10 +32,12 @@ from agent_calculator import (
 
 from csv_tool import load_csv, analyze_csv
 
+from agent_vision import vision_node as existing_vision_node
 
-# ==========================================
+
+# ==================================================
 # STEP 1: Shared agent state
-# ==========================================
+# ==================================================
 
 class AgentState(TypedDict):
     question: str
@@ -47,15 +48,80 @@ class AgentState(TypedDict):
     answer: str
     sources: list
     supported: bool
+    image_path: str
+    vision_prediction: dict
 
 
-# ==========================================
-# STEP 2: Choose the appropriate tool
-# ==========================================
+# ==================================================
+# STEP 2: Extract image path
+# ==================================================
+
+IMAGE_PATH_RE = re.compile(
+    r"(?i)([A-Z]:[\\/][^\r\n\"<>|?*]*?\."
+    r"(?:jpg|jpeg|png|webp|bmp))"
+)
+
+
+def extract_image_path(question: str) -> str:
+
+    match = IMAGE_PATH_RE.search(question)
+
+    if match:
+        return match.group(1).strip()
+
+    return ""
+
+
+# ==================================================
+# STEP 3: Select the appropriate tool
+# ==================================================
 
 def choose_tool(state: AgentState):
 
-    question = state["question"].lower()
+    question = state["question"]
+    question_lower = question.lower()
+
+    # ----------------------------------------------
+    # ROUTE 1: COMPUTER VISION
+    # ----------------------------------------------
+
+    image_path = extract_image_path(question)
+
+    if image_path:
+
+        return {
+            "selected_tool": "vision",
+            "image_path": image_path,
+        }
+
+    vision_phrases = [
+        "analyze this image",
+        "analyse this image",
+        "analyze this photo",
+        "analyse this photo",
+        "analyze wheat image",
+        "analyse wheat image",
+        "classify this image",
+        "classify this photo",
+        "classify wheat image",
+        "predict from image",
+        "identify disease in image",
+        "identify disease from photo",
+    ]
+
+    if any(
+        phrase in question_lower
+        for phrase in vision_phrases
+    ):
+
+        return {
+            "selected_tool": "vision",
+            "image_path": "",
+        }
+
+    # ----------------------------------------------
+    # ROUTE 2: CSV ANALYSIS
+    # ----------------------------------------------
 
     csv_indicators = [
         ".csv",
@@ -65,23 +131,88 @@ def choose_tool(state: AgentState):
     ]
 
     if any(
-        indicator in question
+        indicator in question_lower
         for indicator in csv_indicators
     ):
-        return {"selected_tool": "csv"}
 
-    # Use Gemini for other tool decisions.
+        return {
+            "selected_tool": "csv",
+        }
+
+    # ----------------------------------------------
+    # ROUTE 3: WEATHER
+    # ----------------------------------------------
+    # Weather requests do not need Gemini routing.
+    # This avoids a routing failure when Gemini
+    # returns a temporary 503 UNAVAILABLE error.
+
+    weather_phrases = [
+        "weather",
+        "temperature",
+        "forecast",
+        "rainfall",
+        "humidity",
+        "wind speed",
+    ]
+
+    if any(
+        phrase in question_lower
+        for phrase in weather_phrases
+    ):
+
+        return {
+            "selected_tool": "weather",
+        }
+
+    # ----------------------------------------------
+    # OTHER ROUTES: EXISTING GEMINI ROUTER
+    # ----------------------------------------------
+    # Handles RAG, calculator and unsupported
+    # requests using the existing implementation.
+
     return gemini_router(state)
 
 
-# ==========================================
-# STEP 3: Identify the CSV column
-# ==========================================
+# ==================================================
+# STEP 4: Computer Vision node
+# ==================================================
+
+def vision_node(state: AgentState):
+
+    image_path = (
+        state.get("image_path", "")
+        or extract_image_path(state["question"])
+    )
+
+    result = existing_vision_node({
+        "image_path": image_path,
+        "question": state["question"],
+    })
+
+    prediction = result.get("prediction", {})
+    error = result.get("error", "")
+
+    return {
+        "selected_tool": "vision",
+        "image_path": image_path,
+        "answer": result.get(
+            "response",
+            "No image analysis returned."
+        ),
+        "sources": [],
+        "supported": bool(prediction) and not bool(error),
+        "vision_prediction": prediction,
+    }
+
+
+# ==================================================
+# STEP 5: Identify CSV columns
+# ==================================================
 
 def identify_column(question, columns):
 
-    # Remove the filename before searching
-    # for column names.
+    # Remove CSV filename from the question.
+
     clean_question = re.sub(
         r"\b[A-Za-z0-9_-]+\.csv\b",
         " ",
@@ -90,8 +221,8 @@ def identify_column(question, columns):
 
     text = clean_question.replace("_", " ")
 
-    # First, look for actual column names.
-    # Check longer names first.
+    # Match actual column names first.
+
     for column in sorted(
         columns,
         key=len,
@@ -107,8 +238,8 @@ def identify_column(question, columns):
         if re.search(pattern, text):
             return column
 
-    # Next, match natural-language phrases
-    # to available agricultural columns.
+    # Natural-language aliases.
+
     aliases = [
         ("fertilizer cost", "fertilizer_cost_pkr"),
         ("fertilizer expense", "fertilizer_cost_pkr"),
@@ -135,16 +266,15 @@ def identify_column(question, columns):
     return None
 
 
-# ==========================================
-# STEP 4: Analyze the CSV dataset
-# ==========================================
+# ==================================================
+# STEP 6: CSV analysis node
+# ==================================================
 
 def csv_node(state: AgentState):
 
     question = state["question"]
     question_lower = question.lower()
 
-    # Extract CSV filename from the question.
     filename_match = re.search(
         r"\b[A-Za-z0-9_-]+\.csv\b",
         question,
@@ -152,6 +282,7 @@ def csv_node(state: AgentState):
     )
 
     if not filename_match:
+
         return {
             "answer": (
                 "Please specify a CSV filename. "
@@ -168,9 +299,9 @@ def csv_node(state: AgentState):
 
         columns, rows = load_csv(filename)
 
-        # ----------------------------------
+        # ------------------------------------------
         # Handle row-count questions
-        # ----------------------------------
+        # ------------------------------------------
 
         row_phrases = [
             "how many rows",
@@ -194,9 +325,9 @@ def csv_node(state: AgentState):
                 "supported": True,
             }
 
-        # ----------------------------------
-        # Identify the target column
-        # ----------------------------------
+        # ------------------------------------------
+        # Identify target column
+        # ------------------------------------------
 
         column = identify_column(
             question,
@@ -216,18 +347,18 @@ def csv_node(state: AgentState):
                 "supported": False,
             }
 
-        # ----------------------------------
-        # Perform numerical analysis
-        # ----------------------------------
+        # ------------------------------------------
+        # Analyze numerical data
+        # ------------------------------------------
 
         result = analyze_csv(
             filename,
             column
         )
 
-        # ----------------------------------
-        # Identify requested statistic
-        # ----------------------------------
+        # ------------------------------------------
+        # Select requested statistic
+        # ------------------------------------------
 
         if any(
             word in question_lower
@@ -263,8 +394,6 @@ def csv_node(state: AgentState):
 
         else:
 
-            # If no specific statistic is
-            # requested, show all statistics.
             return {
                 "answer": (
                     f"Dataset: {filename}\n"
@@ -279,9 +408,9 @@ def csv_node(state: AgentState):
                 "supported": True,
             }
 
-        # ----------------------------------
-        # Format the result with units
-        # ----------------------------------
+        # ------------------------------------------
+        # Format value with appropriate units
+        # ------------------------------------------
 
         formatted_value = f"{value:,.2f}"
 
@@ -327,16 +456,20 @@ def csv_node(state: AgentState):
         }
 
 
-# ==========================================
-# STEP 5: Build the LangGraph workflow
-# ==========================================
+# ==================================================
+# STEP 7: Build LangGraph workflow
+# ==================================================
 
 workflow = StateGraph(AgentState)
+
+# Router
 
 workflow.add_node(
     "router",
     choose_tool
 )
+
+# Existing tools
 
 workflow.add_node(
     "rag",
@@ -363,10 +496,21 @@ workflow.add_node(
     unsupported_node
 )
 
+# Computer Vision tool
+
+workflow.add_node(
+    "vision",
+    vision_node
+)
+
+# Entry point
+
 workflow.add_edge(
     START,
     "router"
 )
+
+# Conditional routing
 
 workflow.add_conditional_edges(
     "router",
@@ -376,15 +520,19 @@ workflow.add_conditional_edges(
         "weather": "weather",
         "calculator": "calculator",
         "csv": "csv",
+        "vision": "vision",
         "unsupported": "unsupported",
     }
 )
+
+# End all tool routes.
 
 for node in [
     "rag",
     "weather",
     "calculator",
     "csv",
+    "vision",
     "unsupported"
 ]:
 
@@ -393,17 +541,23 @@ for node in [
         END
     )
 
+# Compile agent.
+
 app = workflow.compile()
 
 
-# ==========================================
-# STEP 6: Interactive application
-# ==========================================
+# ==================================================
+# STEP 8: Interactive application
+# ==================================================
 
 def main():
 
     print("=" * 55)
-    print("AGRIASSIST-RX: FIVE-ROUTE AI AGENT")
+
+    print(
+        "AGRIASSIST-RX: SIX-ROUTE AI AGENT"
+    )
+
     print("=" * 55)
 
     print("\nType 'exit' to stop.\n")
@@ -438,6 +592,8 @@ def main():
                     "answer": "",
                     "sources": [],
                     "supported": False,
+                    "image_path": "",
+                    "vision_prediction": {},
                 })
 
                 print("\n" + "-" * 55)
@@ -480,12 +636,11 @@ def main():
 
     finally:
 
-        # Close the Gemini client used by
-        # the agricultural RAG module.
+        # Close Gemini RAG client if loaded.
+
         if "rag" in sys.modules:
 
             from rag import client
-
             client.close()
 
 
