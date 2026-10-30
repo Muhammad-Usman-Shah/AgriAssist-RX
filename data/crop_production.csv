@@ -1,0 +1,6 @@
+field,crop,area_acres,yield_kg,fertilizer_cost_pkr
+Field_A,Wheat,5,2400,18000
+Field_B,Wheat,4,1900,14500
+Field_C,Wheat,6,3100,22000
+Field_D,Wheat,3,1400,11000
+Field_E,Wheat,2,1000,8000
