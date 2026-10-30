@@ -1,0 +1,77 @@
+{
+  "input_images": 10887,
+  "candidate_pairs": 709,
+  "total_groups": 10242,
+  "consistent_label_groups": 10160,
+  "conflicting_label_groups": 82,
+  "excluded_images": 223,
+  "retained_images": 10664,
+  "largest_group_size": 7,
+  "split_counts": {
+    "train": 8540,
+    "validation": 1073,
+    "test": 1051
+  },
+  "class_counts": {
+    "train": {
+      "aphid": 688,
+      "black_rust": 253,
+      "blast": 468,
+      "brown_rust": 956,
+      "common_root_rot": 455,
+      "fusarium_head_blight": 512,
+      "healthy": 829,
+      "leaf_blight": 452,
+      "mildew": 900,
+      "mite": 612,
+      "septoria": 280,
+      "smut": 408,
+      "stem_fly": 138,
+      "tan_spot": 508,
+      "yellow_rust": 1081
+    },
+    "validation": {
+      "aphid": 86,
+      "black_rust": 32,
+      "blast": 59,
+      "brown_rust": 120,
+      "common_root_rot": 57,
+      "fusarium_head_blight": 64,
+      "healthy": 104,
+      "leaf_blight": 57,
+      "mildew": 113,
+      "mite": 77,
+      "septoria": 35,
+      "smut": 51,
+      "stem_fly": 18,
+      "tan_spot": 64,
+      "yellow_rust": 136
+    },
+    "test": {
+      "aphid": 86,
+      "black_rust": 31,
+      "blast": 58,
+      "brown_rust": 118,
+      "common_root_rot": 56,
+      "fusarium_head_blight": 64,
+      "healthy": 103,
+      "leaf_blight": 55,
+      "mildew": 110,
+      "mite": 75,
+      "septoria": 34,
+      "smut": 49,
+      "stem_fly": 16,
+      "tan_spot": 62,
+      "yellow_rust": 134
+    }
+  },
+  "remaining_flagged_cross_split_edges": 0,
+  "seed": 42,
+  "limitations": [
+    "dHash candidate groups not all manually confirmed",
+    "Unreviewed near-duplicates may remain",
+    "No independent plant or field IDs",
+    "Single-label annotations not fully verified",
+    "This is an internal provisional benchmark"
+  ]
+}

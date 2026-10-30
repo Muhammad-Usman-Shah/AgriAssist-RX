@@ -1,0 +1,72 @@
+{
+  "original_images": 14154,
+  "unique_hashes": 11143,
+  "excluded_conflicting_hash_groups": 256,
+  "retained_unique_images": 10887,
+  "seed": 42,
+  "splits": {
+    "train": 8703,
+    "validation": 1084,
+    "test": 1100
+  },
+  "class_counts": {
+    "train": {
+      "aphid": 696,
+      "black_rust": 264,
+      "blast": 469,
+      "brown_rust": 969,
+      "common_root_rot": 464,
+      "fusarium_head_blight": 516,
+      "healthy": 828,
+      "leaf_blight": 492,
+      "mildew": 904,
+      "mite": 616,
+      "septoria": 279,
+      "smut": 420,
+      "stem_fly": 137,
+      "tan_spot": 569,
+      "yellow_rust": 1080
+    },
+    "validation": {
+      "aphid": 87,
+      "black_rust": 33,
+      "blast": 58,
+      "brown_rust": 121,
+      "common_root_rot": 58,
+      "fusarium_head_blight": 64,
+      "healthy": 103,
+      "leaf_blight": 61,
+      "mildew": 113,
+      "mite": 77,
+      "septoria": 34,
+      "smut": 52,
+      "stem_fly": 17,
+      "tan_spot": 71,
+      "yellow_rust": 135
+    },
+    "test": {
+      "aphid": 87,
+      "black_rust": 33,
+      "blast": 60,
+      "brown_rust": 122,
+      "common_root_rot": 58,
+      "fusarium_head_blight": 65,
+      "healthy": 105,
+      "leaf_blight": 63,
+      "mildew": 114,
+      "mite": 78,
+      "septoria": 36,
+      "smut": 53,
+      "stem_fly": 18,
+      "tan_spot": 72,
+      "yellow_rust": 136
+    }
+  },
+  "exact_cross_split_overlap": 0,
+  "limitations": [
+    "Near duplicates not yet checked",
+    "No plant or collection-session grouping",
+    "Labels not manually verified",
+    "Test split is internally held out"
+  ]
+}

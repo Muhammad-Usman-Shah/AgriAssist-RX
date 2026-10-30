@@ -1,0 +1,209 @@
+{
+  "dataset_root": "D:\\AgriAssist-Datasets",
+  "splits": {
+    "train": {
+      "folder": "D:\\AgriAssist-Datasets\\train",
+      "total_images": 13104,
+      "class_counts": {
+        "aphid": 903,
+        "black_rust": 576,
+        "blast": 647,
+        "brown_rust": 1271,
+        "common_root_rot": 614,
+        "fusarium_head_blight": 611,
+        "healthy": 1000,
+        "leaf_blight": 842,
+        "mildew": 1081,
+        "mite": 800,
+        "septoria": 1144,
+        "smut": 1310,
+        "stem_fly": 234,
+        "tan_spot": 770,
+        "yellow_rust": 1301
+      },
+      "original_folder_names": {
+        "aphid": [
+          "Aphid"
+        ],
+        "black_rust": [
+          "Black Rust"
+        ],
+        "blast": [
+          "Blast"
+        ],
+        "brown_rust": [
+          "Brown Rust"
+        ],
+        "common_root_rot": [
+          "Common Root Rot"
+        ],
+        "fusarium_head_blight": [
+          "Fusarium Head Blight"
+        ],
+        "healthy": [
+          "Healthy"
+        ],
+        "leaf_blight": [
+          "Leaf Blight"
+        ],
+        "mildew": [
+          "Mildew"
+        ],
+        "mite": [
+          "Mite"
+        ],
+        "septoria": [
+          "Septoria"
+        ],
+        "smut": [
+          "Smut"
+        ],
+        "stem_fly": [
+          "Stem fly"
+        ],
+        "tan_spot": [
+          "Tan spot"
+        ],
+        "yellow_rust": [
+          "Yellow Rust"
+        ]
+      }
+    },
+    "validation": {
+      "folder": "D:\\AgriAssist-Datasets\\valid",
+      "total_images": 300,
+      "class_counts": {
+        "aphid": 20,
+        "black_rust": 20,
+        "blast": 20,
+        "brown_rust": 20,
+        "common_root_rot": 20,
+        "fusarium_head_blight": 20,
+        "healthy": 20,
+        "leaf_blight": 20,
+        "mildew": 20,
+        "mite": 20,
+        "septoria": 20,
+        "smut": 20,
+        "stem_fly": 20,
+        "tan_spot": 20,
+        "yellow_rust": 20
+      },
+      "original_folder_names": {
+        "aphid": [
+          "aphid_valid"
+        ],
+        "black_rust": [
+          "black_rust_valid"
+        ],
+        "blast": [
+          "blast_test_valid"
+        ],
+        "brown_rust": [
+          "brown_rust_valid"
+        ],
+        "common_root_rot": [
+          "common_root_rot_valid"
+        ],
+        "fusarium_head_blight": [
+          "fusarium_head_blight_valid"
+        ],
+        "healthy": [
+          "healthy_valid"
+        ],
+        "leaf_blight": [
+          "leaf_blight_valid"
+        ],
+        "mildew": [
+          "mildew_valid"
+        ],
+        "mite": [
+          "mite_valid"
+        ],
+        "septoria": [
+          "septoria_valid"
+        ],
+        "smut": [
+          "smut_valid"
+        ],
+        "stem_fly": [
+          "stem_fly_valid"
+        ],
+        "tan_spot": [
+          "tan_spot_valid"
+        ],
+        "yellow_rust": [
+          "yellow_rust_valid"
+        ]
+      }
+    },
+    "test": {
+      "folder": "D:\\AgriAssist-Datasets\\test",
+      "total_images": 750,
+      "class_counts": {
+        "aphid": 50,
+        "black_rust": 50,
+        "blast": 50,
+        "brown_rust": 50,
+        "common_root_rot": 50,
+        "fusarium_head_blight": 50,
+        "healthy": 50,
+        "leaf_blight": 50,
+        "mildew": 50,
+        "mite": 50,
+        "septoria": 50,
+        "smut": 50,
+        "stem_fly": 50,
+        "tan_spot": 50,
+        "yellow_rust": 50
+      },
+      "original_folder_names": {
+        "aphid": [
+          "aphid_test"
+        ],
+        "black_rust": [
+          "black_rust_test"
+        ],
+        "blast": [
+          "blast_test"
+        ],
+        "brown_rust": [
+          "brown_rust_test"
+        ],
+        "common_root_rot": [
+          "common_root_rot_test"
+        ],
+        "fusarium_head_blight": [
+          "fusarium_head_blight_test"
+        ],
+        "healthy": [
+          "healthy_test"
+        ],
+        "leaf_blight": [
+          "leaf_blight_test"
+        ],
+        "mildew": [
+          "mildew_test"
+        ],
+        "mite": [
+          "mite_test"
+        ],
+        "septoria": [
+          "septoria_test"
+        ],
+        "smut": [
+          "smut_test"
+        ],
+        "stem_fly": [
+          "stem_fly_test"
+        ],
+        "tan_spot": [
+          "tan_spot_test"
+        ],
+        "yellow_rust": [
+          "yellow_rust_test"
+        ]
+      }
+    }
+  }
+}

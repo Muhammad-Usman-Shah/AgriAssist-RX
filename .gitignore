@@ -238,3 +238,28 @@ data/raw_pdfs/
 *.pt
 *.pth
 *.onnx
+
+# Phase 5 - Computer Vision
+/data/wheat_images/
+/models/*.pth
+/models/*.pt
+/models/*.onnx
+
+# Phase 5 - Generated Computer Vision review images
+/eval/vision/near_duplicate_review/
+/eval/vision/full_duplicate_review/
+
+# Phase 5 - Large generated image files
+/eval/vision/**/*.jpg
+/eval/vision/**/*.jpeg
+/eval/vision/**/*.png
+
+# Phase 5 - Local dataset manifests containing Windows paths
+/eval/vision/*manifest.csv
+
+# Phase 5 - Local image-path audit reports
+/eval/vision/image_quality_report.json
+/eval/vision/duplicate_audit_summary.json
+/eval/vision/near_duplicate_report.json
+/eval/vision/excluded_label_conflicts.json
+/eval/vision/wheat_grouped_exclusions.json
