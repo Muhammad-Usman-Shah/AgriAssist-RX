@@ -1,7 +1,7 @@
 
 """
 AgriAssist-RX
-Phase 6 - Updated Six-Route LangGraph Agent
+Phase 6: Improved Six-Route LangGraph Agent
 
 Routes:
 1. Agricultural RAG
@@ -11,11 +11,12 @@ Routes:
 5. Wheat image classification
 6. Unsupported requests
 
-Updates:
-- Improved wheat image request detection.
-- Preserved weather routing without Gemini.
-- Preserved existing calculator integration.
-- Preserved CSV column matching and statistics.
+Update:
+- More flexible Computer Vision intent detection.
+- Avoid confusing image-analysis requests with
+  general educational questions about images.
+- Preserve existing RAG, weather, calculator,
+  CSV and unsupported functionality.
 """
 
 import re
@@ -35,7 +36,9 @@ from agent_calculator import (
 
 from csv_tool import load_csv, analyze_csv
 
-from agent_vision import vision_node as existing_vision_node
+from agent_vision import (
+    vision_node as existing_vision_node,
+)
 
 
 # ==================================================
@@ -56,7 +59,7 @@ class AgentState(TypedDict):
 
 
 # ==================================================
-# STEP 2: Extract an image path
+# STEP 2: Extract local image paths
 # ==================================================
 
 IMAGE_PATH_RE = re.compile(
@@ -76,64 +79,211 @@ def extract_image_path(question: str) -> str:
 
 
 # ==================================================
-# STEP 3: Select the correct tool
+# STEP 3: Detect Computer Vision requests
+# ==================================================
+
+def is_vision_request(question: str) -> bool:
+    """
+    Detect requests to analyze an actual image.
+
+    Does not require the exact wording to match
+    a hard-coded phrase.
+
+    General educational questions about
+    computer vision should not automatically
+    use the Vision tool.
+    """
+
+    text = question.lower().strip()
+
+    # If a local image path is supplied,
+    # treat the request as image analysis.
+
+    if extract_image_path(question):
+        return True
+
+    # General learning questions usually do not
+    # request analysis of a particular image.
+
+    educational_patterns = [
+        r"^\s*what\s+is\s+image\s+classification\b",
+        r"^\s*what\s+are\s+image\s+classification\b",
+        r"^\s*explain\s+how\s+image\s+classification\b",
+        r"^\s*how\s+does\s+image\s+classification\b",
+        r"^\s*how\s+do\s+image\s+classifiers\b",
+        r"^\s*what\s+is\s+computer\s+vision\b",
+        r"^\s*explain\s+computer\s+vision\b",
+        r"^\s*how\s+does\s+computer\s+vision\b",
+    ]
+
+    for pattern in educational_patterns:
+
+        if re.search(pattern, text):
+            return False
+
+    # Look for image-related words.
+
+    image_terms = [
+        "image",
+        "photo",
+        "photograph",
+        "picture",
+        "snapshot",
+    ]
+
+    contains_image_term = any(
+        re.search(
+            r"\b" + re.escape(term) + r"s?\b",
+            text
+        )
+        for term in image_terms
+    )
+
+    if not contains_image_term:
+        return False
+
+    # Common action words used when a person
+    # wants the agent to inspect an image.
+
+    action_patterns = [
+        r"\banaly[sz]e\b",
+        r"\bexamine\b",
+        r"\bclassify\b",
+        r"\bclassification\b",
+        r"\bidentify\b",
+        r"\bdetect\b",
+        r"\bpredict\b",
+        r"\brecognize\b",
+        r"\brecognise\b",
+        r"\binspect\b",
+        r"\bcheck\b",
+        r"\bdiagnos(?:e|is)\b",
+        r"\bscan\b",
+    ]
+
+    contains_action = any(
+        re.search(pattern, text)
+        for pattern in action_patterns
+    )
+
+    # Agriculture-related context helps identify
+    # disease and crop-image analysis.
+
+    agricultural_patterns = [
+        r"\bwheat\b",
+        r"\bcrop\b",
+        r"\bplant\b",
+        r"\bleaf\b",
+        r"\bleaves\b",
+        r"\bdisease\b",
+        r"\brust\b",
+        r"\bpest\b",
+        r"\baphid\b",
+    ]
+
+    contains_agriculture = any(
+        re.search(pattern, text)
+        for pattern in agricultural_patterns
+    )
+
+    # Detect whether the question refers
+    # to an actual image being provided.
+
+    particular_image_patterns = [
+        r"\bthis\b",
+        r"\bthat\b",
+        r"\bthese\b",
+        r"\bmy\b",
+        r"\battached\b",
+        r"\buploaded\b",
+        r"\bshown\b",
+        r"\bvisible\b",
+    ]
+
+    refers_to_particular_image = any(
+        re.search(pattern, text)
+        for pattern in particular_image_patterns
+    )
+
+    # Example:
+    # "Please examine this wheat photograph."
+
+    if (
+        contains_image_term
+        and contains_action
+        and refers_to_particular_image
+    ):
+        return True
+
+    # Example:
+    # "Run image classification on a wheat
+    # plant photo."
+    #
+    # This route is also useful when the image
+    # has not yet been supplied.
+
+    explicit_vision_patterns = [
+        r"\brun\s+image\s+classification\b",
+        r"\bperform\s+image\s+classification\b",
+        r"\buse\s+image\s+classification\b",
+        r"\bclassify\s+(?:the\s+)?wheat\b",
+        r"\bpredict\s+(?:the\s+)?disease\s+from\b",
+        r"\bidentify\s+(?:the\s+)?condition\b",
+    ]
+
+    if contains_agriculture:
+
+        for pattern in explicit_vision_patterns:
+
+            if re.search(pattern, text):
+                return True
+
+    # Example:
+    # "What disease is visible in this
+    # wheat image?"
+
+    visual_diagnosis_patterns = [
+        r"\bwhat\s+disease\s+is\s+visible\b",
+        r"\bwhat\s+condition\s+is\s+visible\b",
+        r"\bwhich\s+disease\s+is\s+shown\b",
+        r"\bwhat\s+disease\s+does\s+this\b",
+    ]
+
+    if contains_agriculture:
+
+        for pattern in visual_diagnosis_patterns:
+
+            if re.search(pattern, text):
+                return True
+
+    return False
+
+
+# ==================================================
+# STEP 4: Select the appropriate tool
 # ==================================================
 
 def choose_tool(state: AgentState):
 
     question = state["question"]
+
     question_lower = question.lower()
 
     # ----------------------------------------------
     # ROUTE 1: COMPUTER VISION
     # ----------------------------------------------
 
-    image_path = extract_image_path(question)
-
-    if image_path:
+    if is_vision_request(question):
 
         return {
             "selected_tool": "vision",
-            "image_path": image_path,
-        }
-
-    # Accept different ways of requesting
-    # agricultural image analysis.
-
-    vision_phrases = [
-        "analyze this image",
-        "analyse this image",
-        "analyze this photo",
-        "analyse this photo",
-        "analyze wheat image",
-        "analyse wheat image",
-        "analyze this wheat image",
-        "analyse this wheat image",
-        "classify this image",
-        "classify this photo",
-        "classify wheat image",
-        "classify this wheat image",
-        "predict from image",
-        "identify disease in image",
-        "identify disease from photo",
-        "identify disease from image",
-        "identify wheat disease from photo",
-        "wheat image analysis",
-        "wheat photo analysis",
-    ]
-
-    if any(
-        phrase in question_lower
-        for phrase in vision_phrases
-    ):
-
-        return {
-            "selected_tool": "vision",
-            "image_path": "",
+            "image_path": extract_image_path(
+                question
+            ),
         }
 
     # ----------------------------------------------
-    # ROUTE 2: CSV DATA ANALYSIS
+    # ROUTE 2: CSV ANALYSIS
     # ----------------------------------------------
 
     csv_indicators = [
@@ -153,11 +303,8 @@ def choose_tool(state: AgentState):
         }
 
     # ----------------------------------------------
-    # ROUTE 3: WEATHER
+    # ROUTE 3: LIVE WEATHER
     # ----------------------------------------------
-
-    # Direct routing avoids depending on Gemini
-    # for straightforward weather questions.
 
     weather_phrases = [
         "weather",
@@ -178,23 +325,22 @@ def choose_tool(state: AgentState):
         }
 
     # ----------------------------------------------
-    # REMAINING ROUTES
+    # OTHER ROUTES
     # ----------------------------------------------
 
-    # Existing Gemini router handles:
+    # Gemini handles:
     # - Agricultural RAG
     # - Calculator
     # - Unsupported requests
     #
-    # Do not force calculator routing here:
-    # calculator_node needs operation arguments
-    # that the existing router provides.
+    # The calculator's yield_production operation
+    # is implemented in agent_calculator.py.
 
     return gemini_router(state)
 
 
 # ==================================================
-# STEP 4: Computer Vision node
+# STEP 5: Computer Vision node
 # ==================================================
 
 def vision_node(state: AgentState):
@@ -204,13 +350,20 @@ def vision_node(state: AgentState):
         or extract_image_path(state["question"])
     )
 
+    # Reuse existing LangGraph Vision node.
+
     result = existing_vision_node({
         "image_path": image_path,
         "question": state["question"],
     })
 
-    prediction = result.get("prediction", {})
-    error = result.get("error", "")
+    prediction = result.get(
+        "prediction", {}
+    )
+
+    error = result.get(
+        "error", ""
+    )
 
     return {
         "selected_tool": "vision",
@@ -220,20 +373,22 @@ def vision_node(state: AgentState):
             "No image analysis returned."
         ),
         "sources": [],
-        "supported": bool(prediction) and not bool(error),
+        "supported": (
+            bool(prediction)
+            and not bool(error)
+        ),
         "vision_prediction": prediction,
     }
 
 
 # ==================================================
-# STEP 5: Identify CSV columns
+# STEP 6: Identify CSV columns
 # ==================================================
 
 def identify_column(question, columns):
 
-    # Remove filenames before matching columns.
-    # This prevents accidental matches inside
-    # the CSV filename.
+    # Remove the filename before looking for
+    # CSV column names.
 
     clean_question = re.sub(
         r"\b[A-Za-z0-9_-]+\.csv\b",
@@ -243,8 +398,8 @@ def identify_column(question, columns):
 
     text = clean_question.replace("_", " ")
 
-    # First match actual column names.
-    # Longer names are checked first.
+    # Match actual column names first.
+    # Match longer column names before shorter.
 
     for column in sorted(
         columns,
@@ -257,23 +412,49 @@ def identify_column(question, columns):
         )
 
         pattern = (
-            r"\b" + re.escape(readable) + r"\b"
+            r"\b"
+            + re.escape(readable)
+            + r"\b"
         )
 
         if re.search(pattern, text):
             return column
 
-    # Match common natural-language phrases.
+    # Natural-language aliases.
 
     aliases = [
-        ("fertilizer cost", "fertilizer_cost_pkr"),
-        ("fertilizer expense", "fertilizer_cost_pkr"),
-        ("fertilizer spending", "fertilizer_cost_pkr"),
-        ("production", "yield_kg"),
-        ("yield", "yield_kg"),
-        ("field area", "area_acres"),
-        ("cultivated area", "area_acres"),
-        ("acreage", "area_acres"),
+        (
+            "fertilizer cost",
+            "fertilizer_cost_pkr"
+        ),
+        (
+            "fertilizer expense",
+            "fertilizer_cost_pkr"
+        ),
+        (
+            "fertilizer spending",
+            "fertilizer_cost_pkr"
+        ),
+        (
+            "production",
+            "yield_kg"
+        ),
+        (
+            "yield",
+            "yield_kg"
+        ),
+        (
+            "field area",
+            "area_acres"
+        ),
+        (
+            "cultivated area",
+            "area_acres"
+        ),
+        (
+            "acreage",
+            "area_acres"
+        ),
     ]
 
     for phrase, column in aliases:
@@ -282,7 +463,9 @@ def identify_column(question, columns):
             continue
 
         pattern = (
-            r"\b" + re.escape(phrase) + r"\b"
+            r"\b"
+            + re.escape(phrase)
+            + r"\b"
         )
 
         if re.search(pattern, text):
@@ -292,13 +475,16 @@ def identify_column(question, columns):
 
 
 # ==================================================
-# STEP 6: CSV analysis node
+# STEP 7: CSV analysis node
 # ==================================================
 
 def csv_node(state: AgentState):
 
     question = state["question"]
+
     question_lower = question.lower()
+
+    # Extract CSV filename.
 
     filename_match = re.search(
         r"\b[A-Za-z0-9_-]+\.csv\b",
@@ -325,7 +511,7 @@ def csv_node(state: AgentState):
         columns, rows = load_csv(filename)
 
         # ------------------------------------------
-        # Handle number-of-rows questions.
+        # Row-count questions
         # ------------------------------------------
 
         row_phrases = [
@@ -351,7 +537,7 @@ def csv_node(state: AgentState):
             }
 
         # ------------------------------------------
-        # Identify the requested column.
+        # Identify target column
         # ------------------------------------------
 
         column = identify_column(
@@ -373,7 +559,7 @@ def csv_node(state: AgentState):
             }
 
         # ------------------------------------------
-        # Perform CSV analysis.
+        # Calculate numerical statistics
         # ------------------------------------------
 
         result = analyze_csv(
@@ -382,7 +568,7 @@ def csv_node(state: AgentState):
         )
 
         # ------------------------------------------
-        # Select the requested statistic.
+        # Identify requested statistic
         # ------------------------------------------
 
         if any(
@@ -395,7 +581,11 @@ def csv_node(state: AgentState):
 
         elif any(
             word in question_lower
-            for word in ["minimum", "lowest", "min"]
+            for word in [
+                "minimum",
+                "lowest",
+                "min"
+            ]
         ):
 
             metric = "MINIMUM"
@@ -403,7 +593,11 @@ def csv_node(state: AgentState):
 
         elif any(
             word in question_lower
-            for word in ["maximum", "highest", "max"]
+            for word in [
+                "maximum",
+                "highest",
+                "max"
+            ]
         ):
 
             metric = "MAXIMUM"
@@ -418,6 +612,9 @@ def csv_node(state: AgentState):
             value = result["sum"]
 
         else:
+
+            # Return all statistics when the
+            # requested statistic is unclear.
 
             return {
                 "answer": (
@@ -434,7 +631,7 @@ def csv_node(state: AgentState):
             }
 
         # ------------------------------------------
-        # Add correct units.
+        # Format value with units
         # ------------------------------------------
 
         formatted_value = f"{value:,.2f}"
@@ -482,7 +679,7 @@ def csv_node(state: AgentState):
 
 
 # ==================================================
-# STEP 7: Build LangGraph workflow
+# STEP 8: Build LangGraph workflow
 # ==================================================
 
 workflow = StateGraph(AgentState)
@@ -494,7 +691,7 @@ workflow.add_node(
     choose_tool
 )
 
-# Existing agricultural RAG
+# Agricultural RAG
 
 workflow.add_node(
     "rag",
@@ -508,14 +705,14 @@ workflow.add_node(
     weather_tool
 )
 
-# Agricultural calculations
+# Agricultural calculator
 
 workflow.add_node(
     "calculator",
     calculator_node
 )
 
-# CSV statistics
+# CSV analysis
 
 workflow.add_node(
     "csv",
@@ -536,14 +733,14 @@ workflow.add_node(
     unsupported_node
 )
 
-# Entry point
+# Start from the router.
 
 workflow.add_edge(
     START,
     "router"
 )
 
-# Select tool.
+# Route according to the selected tool.
 
 workflow.add_conditional_edges(
     "router",
@@ -558,7 +755,7 @@ workflow.add_conditional_edges(
     }
 )
 
-# All routes terminate at END.
+# Every route ends after its tool executes.
 
 for node in [
     "rag",
@@ -574,13 +771,13 @@ for node in [
         END
     )
 
-# Compile the agent.
+# Compile LangGraph.
 
 app = workflow.compile()
 
 
 # ==================================================
-# STEP 8: Interactive application
+# STEP 9: Interactive application
 # ==================================================
 
 def main():
@@ -642,6 +839,8 @@ def main():
 
                 print(result["answer"])
 
+                # Show RAG evidence sources.
+
                 if result["sources"]:
 
                     print("\nEVIDENCE SOURCES:")
@@ -670,6 +869,8 @@ def main():
                 )
 
     finally:
+
+        # Close Gemini client if RAG was loaded.
 
         if "rag" in sys.modules:
 

@@ -1,0 +1,61 @@
+{
+  "timestamp_utc": "2026-10-31T20:23:11.738335+00:00",
+  "evaluation": "API error recheck",
+  "previous_report": "routing_unseen_60.json",
+  "total_rechecked": 6,
+  "passed": 6,
+  "failed": 0,
+  "errors": 0,
+  "request_interval_seconds": 10,
+  "note": "Retests previously unfinished routing cases. Original results are preserved. Answer correctness was not evaluated.",
+  "results": [
+    {
+      "id": "C06",
+      "question": "A farmer uses 2 fertilizer bags per acre on 7 acres. Calculate total bags.",
+      "expected": "calculator",
+      "actual": "calculator",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U01",
+      "question": "Who wrote the novel Pride and Prejudice?",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U02",
+      "question": "How can I repair my laptop screen?",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U03",
+      "question": "Give me the latest football transfer news.",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U04",
+      "question": "Write a birthday message for my friend.",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U05",
+      "question": "Explain the rules of chess.",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    }
+  ]
+}
