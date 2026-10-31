@@ -1,0 +1,251 @@
+{
+  "timestamp_utc": "2026-10-31T19:55:08.753214+00:00",
+  "total_cases": 30,
+  "passed": 30,
+  "failed": 0,
+  "errors": 0,
+  "accuracy_percent": 100.0,
+  "note": "Routing-only evaluation. Answer quality not evaluated. Accuracy excludes ERROR cases.",
+  "results": [
+    {
+      "id": "R01",
+      "question": "What are the symptoms of wheat stem rust?",
+      "expected": "rag",
+      "actual": "rag",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "R02",
+      "question": "What causes wheat leaf rust?",
+      "expected": "rag",
+      "actual": "rag",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "R03",
+      "question": "How does wheat stripe rust spread?",
+      "expected": "rag",
+      "actual": "rag",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "R04",
+      "question": "What are the signs of wheat rust infection?",
+      "expected": "rag",
+      "actual": "rag",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "R05",
+      "question": "How can farmers recognize wheat stem rust?",
+      "expected": "rag",
+      "actual": "rag",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "W01",
+      "question": "What is the current weather in Lahore?",
+      "expected": "weather",
+      "actual": "weather",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "W02",
+      "question": "What is the temperature in Multan today?",
+      "expected": "weather",
+      "actual": "weather",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "W03",
+      "question": "What is the weather forecast for Islamabad?",
+      "expected": "weather",
+      "actual": "weather",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "W04",
+      "question": "What is the humidity in Faisalabad today?",
+      "expected": "weather",
+      "actual": "weather",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "W05",
+      "question": "What is the wind speed in Karachi today?",
+      "expected": "weather",
+      "actual": "weather",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "C01",
+      "question": "How many fertilizer bags are needed for 5 acres at 2 bags per acre?",
+      "expected": "calculator",
+      "actual": "calculator",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "C02",
+      "question": "Calculate the total seed needed for 4 acres at 50 kg per acre.",
+      "expected": "calculator",
+      "actual": "calculator",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "C03",
+      "question": "Calculate irrigation water for 3 acres at 2000 liters per acre.",
+      "expected": "calculator",
+      "actual": "calculator",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "C04",
+      "question": "Calculate fertilizer cost for 6 bags at 4500 PKR per bag.",
+      "expected": "calculator",
+      "actual": "calculator",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "C05",
+      "question": "If wheat yield is 1800 kg per acre, calculate production from 3 acres.",
+      "expected": "calculator",
+      "actual": "calculator",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "D01",
+      "question": "What is the average yield in crop_production.csv?",
+      "expected": "csv",
+      "actual": "csv",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "D02",
+      "question": "How many rows are in crop_production.csv?",
+      "expected": "csv",
+      "actual": "csv",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "D03",
+      "question": "What is the total fertilizer cost in crop_production.csv?",
+      "expected": "csv",
+      "actual": "csv",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "D04",
+      "question": "What is the minimum yield in the CSV file crop_production.csv?",
+      "expected": "csv",
+      "actual": "csv",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "D05",
+      "question": "What is the maximum area in crop_production.csv?",
+      "expected": "csv",
+      "actual": "csv",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "V01",
+      "question": "Analyze this image: D:\\AgriAssist-Datasets\\train\\Aphid\\aphid_27.png",
+      "expected": "vision",
+      "actual": "vision",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "V02",
+      "question": "Analyze this wheat image.",
+      "expected": "vision",
+      "actual": "vision",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "V03",
+      "question": "Classify this photo.",
+      "expected": "vision",
+      "actual": "vision",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "V04",
+      "question": "Identify disease from photo.",
+      "expected": "vision",
+      "actual": "vision",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "V05",
+      "question": "Predict from image.",
+      "expected": "vision",
+      "actual": "vision",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U01",
+      "question": "Who won the FIFA World Cup in 2018?",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U02",
+      "question": "Write a romantic poem.",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U03",
+      "question": "What is the capital of France?",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U04",
+      "question": "Explain how to build a gaming PC.",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    },
+    {
+      "id": "U05",
+      "question": "Recommend a science fiction movie.",
+      "expected": "unsupported",
+      "actual": "unsupported",
+      "status": "PASS",
+      "details": ""
+    }
+  ]
+}
