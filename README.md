@@ -180,6 +180,8 @@ The `src` folder contains the application code. The `eval` folder contains testi
 
 ## Installation
 
+For full setup instructions, see the [Setup Guide](docs/SETUP.md).
+
 The project was developed on Windows using VS Code and a Python virtual environment.
 
 ### 1. Clone the repository
