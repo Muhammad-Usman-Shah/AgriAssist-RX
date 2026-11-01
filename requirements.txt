@@ -1,0 +1,27 @@
+
+# PDF processing
+pymupdf==2.0
+pymupdf4llm==2.0
+
+# RAG and retrieval
+chromadb==1.5.9
+sentence-transformers==6.2.0
+rank-bm25==0.2.2
+
+# AI agent and Gemini
+langgraph==1.2.18
+google-genai==2.34.0
+pydantic==2.14.1
+python-dotenv==1.2.4
+
+# Image classification
+torch==2.14.1
+torchvision==0.29.2
+pillow==13.0.0
+
+# Data processing
+numpy==2.4.6
+scikit-learn==1.9.1
+
+# Weather API
+requests==2.34.2
