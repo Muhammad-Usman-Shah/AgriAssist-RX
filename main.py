@@ -1,18 +1,26 @@
 
+"""
+AgriAssist-RX
+Main application entry point.
+
+Starts the six-route agricultural AI agent.
+"""
+
+import sys
+from pathlib import Path
+
+
 def main():
-    print("=" * 50)
-    print("Welcome to AgriAssist-RX")
-    print("Agentic AI for Intelligent Agriculture")
-    print("=" * 50)
 
-    print("\nProject components:")
-    print("1. Retrieval-Augmented Generation (RAG)")
-    print("2. LangGraph AI Agent")
-    print("3. Crop Disease Detection")
-    print("4. Weather Intelligence")
-    print("5. Agricultural Data Analysis")
+    project_root = Path(__file__).resolve().parent
+    source_folder = project_root / "src"
 
-    print("\nProject setup successful!")
+    if str(source_folder) not in sys.path:
+        sys.path.insert(0, str(source_folder))
+
+    from agent_csv import main as run_agent
+
+    run_agent()
 
 
 if __name__ == "__main__":

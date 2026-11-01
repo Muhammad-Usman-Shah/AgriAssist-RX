@@ -226,7 +226,7 @@ Package compatibility has been checked in the development environment. A complet
 After preparing the required local files, start the six-route agent:
 
 ```powershell
-.\.venv\Scripts\python.exe src\agent_csv.py
+.\.venv\Scripts\python.exe main.py
 ```
 
 The program will ask for a question.
