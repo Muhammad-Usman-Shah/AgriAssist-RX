@@ -263,3 +263,6 @@ data/raw_pdfs/
 /eval/vision/near_duplicate_report.json
 /eval/vision/excluded_label_conflicts.json
 /eval/vision/wheat_grouped_exclusions.json
+
+# Local RAG backups
+/data/backup_before_stripe_rust/
