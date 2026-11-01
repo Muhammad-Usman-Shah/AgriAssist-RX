@@ -110,6 +110,18 @@ def choose_tool(state: AgentState) -> dict:
             "arg2": area_rate,
         }
 
+    # Recognize fertilizer acreage cost requests even if the price is missing.
+    # This avoids a Gemini call for a straightforward missing-input case.
+    area = find_area_acres(q)
+    cost_intent = any(word in q for word in ("cost", "price", "expense"))
+    if "fertiliz" in q and cost_intent and area is not None:
+        return {
+            "selected_tool": "calculator",
+            "calculation": "fertilizer_area_cost",
+            "arg1": area,
+            "arg2": None,
+        }
+
     # Existing crop production shortcut: area x kg/acre.
     rate_match = re.search(
         NUMBER + r"\s*(?:kg|kilograms?)\s*(?:/|per)\s*acre\b", q
