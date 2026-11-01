@@ -1,29 +1,12 @@
+"""AgriAssist-RX: Gemini tool router and agricultural calculator.
 
-"""
-AgriAssist-RX
-Phase 6: Intelligent Agent + Agricultural Calculator
-
-Four available routes:
-1. Agricultural RAG
-2. Live weather
-3. Agricultural calculator
-4. Unsupported requests
-
-Calculator operations:
-1. Fertilizer quantity
-2. Fertilizer cost
-3. Seed requirement
-4. Area conversion
-5. Irrigation volume
-6. Crop production (NEW)
-
-Reuses existing tested project functions.
+This module is imported by the six-route agent in src/agent_csv.py.
+It also supports the original standalone four-route LangGraph workflow.
 """
 
 import os
 import re
 import sys
-
 from decimal import Decimal, InvalidOperation
 from enum import Enum
 from pathlib import Path
@@ -32,40 +15,23 @@ from typing import TypedDict
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from langgraph.graph import END, START, StateGraph
 from pydantic import BaseModel
 
-from langgraph.graph import StateGraph, START, END
-
 from calculator_tool import (
-    fertilizer_quantity,
-    fertilizer_cost,
-    seed_requirement,
     acres_to_hectares,
+    fertilizer_cost,
+    fertilizer_quantity,
     irrigation_volume,
+    seed_requirement,
 )
-
-from agent_intelligent import (
-    rag_tool,
-    weather_tool,
-)
-
-
-# ==========================================
-# STEP 1: Configuration
-# ==========================================
+from agent_intelligent import rag_tool, weather_tool
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
-
 load_dotenv(PROJECT_ROOT / ".env")
-
 API_KEY = os.getenv("GEMINI_API_KEY")
-
 MODEL_NAME = "gemini-3.1-flash-lite"
 
-
-# ==========================================
-# STEP 2: Structured AI decisions
-# ==========================================
 
 class ToolName(str, Enum):
     RAG = "rag"
@@ -78,6 +44,7 @@ class CalculationName(str, Enum):
     NONE = "none"
     FERTILIZER_QUANTITY = "fertilizer_quantity"
     FERTILIZER_COST = "fertilizer_cost"
+    FERTILIZER_AREA_COST = "fertilizer_area_cost"
     SEED_REQUIREMENT = "seed_requirement"
     AREA_CONVERSION = "area_conversion"
     IRRIGATION_VOLUME = "irrigation_volume"
@@ -91,10 +58,6 @@ class AgentDecision(BaseModel):
     arg2: str | None
 
 
-# ==========================================
-# STEP 3: Shared graph state
-# ==========================================
-
 class AgentState(TypedDict):
     question: str
     selected_tool: str
@@ -106,40 +69,56 @@ class AgentState(TypedDict):
     supported: bool
 
 
-# ==========================================
-# STEP 4: Gemini router and input extraction
-# ==========================================
+# A numeric value optionally containing a sign, comma separators, or decimals.
+NUMBER = r"(?<![A-Za-z0-9_.])([-+]?\d+(?:,\d{3})*(?:\.\d+)?)"
 
-def choose_tool(state: AgentState):
 
-    # Deterministic extraction for crop production
-    # from an explicitly stated yield rate and area.
-    # This does not require a Gemini API call.
+def find_area_acres(question: str) -> str | None:
+    match = re.search(NUMBER + r"\s*acres?\b", question, re.I)
+    return match.group(1).replace(",", "") if match else None
 
+
+def find_pkr_per_acre(question: str) -> str | None:
+    """Find rates expressed as '3000 PKR per acre' or 'PKR 3000/acre'."""
+    after = re.search(
+        NUMBER + r"\s*(?:pkr|rs\.?)\s*(?:/|per)\s*acre\b",
+        question,
+        re.I,
+    )
+    before = re.search(
+        r"\b(?:pkr|rs\.?)\s*" + NUMBER + r"\s*(?:/|per)\s*acre\b",
+        question,
+        re.I,
+    )
+    match = after or before
+    return match.group(1).replace(",", "") if match else None
+
+
+def choose_tool(state: AgentState) -> dict:
+    """Select a tool; use deterministic handling for explicit unit-based cases."""
     question = state["question"]
     q = question.lower()
 
-    numeric = r"(?<![A-Za-z0-9_.])([-+]?\d+(?:,\d{3})*(?:\.\d+)?)"
+    # A cost in PKR/acre is NOT a cost in PKR/bag.
+    # If either part is missing, the calculator asks for missing information.
+    area_rate = find_pkr_per_acre(q)
+    if "fertiliz" in q and area_rate is not None:
+        return {
+            "selected_tool": "calculator",
+            "calculation": "fertilizer_area_cost",
+            "arg1": find_area_acres(q),
+            "arg2": area_rate,
+        }
 
+    # Existing crop production shortcut: area x kg/acre.
     rate_match = re.search(
-        numeric
-        + r"\s*(?:kg|kilograms?)\s*(?:/|per)\s*acre\b",
-        q,
+        NUMBER + r"\s*(?:kg|kilograms?)\s*(?:/|per)\s*acre\b", q
     )
-
-    area_match = re.search(
-        numeric + r"\s*acres?\b",
-        q,
+    area_match = re.search(NUMBER + r"\s*acres?\b", q)
+    production_intent = any(
+        word in q for word in ("production", "total yield", "harvest")
     )
-
-    production_intent = (
-        "production" in q
-        or "total yield" in q
-        or "harvest" in q
-    )
-
     if rate_match and area_match and production_intent:
-
         return {
             "selected_tool": "calculator",
             "calculation": "yield_production",
@@ -147,103 +126,55 @@ def choose_tool(state: AgentState):
             "arg2": rate_match.group(1).replace(",", ""),
         }
 
-    # Existing Gemini routing for other requests.
-
     if not API_KEY:
-
         return {
             "selected_tool": "unsupported",
-            "answer": "Gemini API key is missing."
+            "answer": "Gemini API key is missing.",
         }
 
-    instruction = """
-You are the tool router for AgriAssist-RX.
+    instruction = """You are the tool router for AgriAssist-RX.
 
-Choose exactly one tool:
+Choose exactly one tool and one calculation operation.
 
-RAG:
-Agricultural knowledge, wheat diseases,
-crop explanations, and effects of weather
-on crop diseases.
+RAG: Agricultural knowledge, wheat diseases, crop explanations, and effects
+of weather on crop diseases.
 
-WEATHER:
-Actual current weather information for
-Pakistani cities. Historical weather and
+WEATHER: Current weather for Pakistani cities. Historical weather and
 long-range forecasts are not supported.
 
-CALCULATOR:
-Arithmetic using user-provided numeric
-values and the following operations:
+CALCULATOR: Only use explicitly supplied numeric inputs with compatible units.
 
-fertilizer_quantity:
-arg1 = area in acres
-arg2 = fertilizer rate in bags per acre
+fertilizer_quantity: arg1 = acres; arg2 = bags per acre.
+fertilizer_cost: arg1 = number of bags; arg2 = PKR per bag.
+fertilizer_area_cost: arg1 = acres; arg2 = PKR per acre.
+seed_requirement: arg1 = acres; arg2 = kg of seed per acre.
+area_conversion: arg1 = acres; arg2 = null.
+irrigation_volume: arg1 = acres; arg2 = water depth in millimetres.
+yield_production: arg1 = acres; arg2 = production rate in kg per acre.
 
-fertilizer_cost:
-arg1 = number of bags
-arg2 = price per bag in PKR
+Important: Never treat acres as bags or PKR/acre as PKR/bag.
+Select fertilizer_area_cost when the question asks for fertilizer costs
+using an acreage and a price per acre. Select fertilizer_cost ONLY when
+prices and amounts are expressed per bag and in bags.
 
-seed_requirement:
-arg1 = area in acres
-arg2 = seed rate in kg per acre
+If a required value is missing or uses an incompatible unit, select
+CALCULATOR with the appropriate operation and set the missing argument to null.
+Do not invent values, change units, or calculate the answer yourself.
 
-area_conversion:
-arg1 = area in acres
-arg2 = null
+UNSUPPORTED: Live market prices, live news, missing images, external policy
+announcements, legal pesticide dosage recommendations, or requests needing
+unavailable external information. If a required market price was not provided,
+choose UNSUPPORTED.
 
-irrigation_volume:
-arg1 = area in acres
-arg2 = water depth in millimetres
-
-yield_production:
-arg1 = field area in acres
-arg2 = wheat/crop yield rate in kg per acre
-Calculate total production in kg. Use this operation
-when the user provides both values and asks for
-production, harvest quantity, or total yield.
-
-If a calculation is requested but required
-numeric values are missing, select CALCULATOR
-and set the missing argument to null.
-
-Only extract numeric values explicitly
-provided by the user. Do not estimate,
-invent, or calculate any values yourself.
-
-Respect units. If a value is supplied in
-an incompatible unit, set that argument
-to null instead of converting it.
-
-If the requested operation is unknown or
-unsupported, choose UNSUPPORTED.
-
-UNSUPPORTED:
-Live market prices, live news, missing
-images, external policy announcements,
-legal pesticide dosage recommendations,
-or questions requiring unavailable data.
-
-If the user asks for a calculation that
-requires a current market price or another
-external value not provided, choose
-UNSUPPORTED.
-
-For non-calculator tools, use:
-calculation = none
-arg1 = null
-arg2 = null
-
+For non-calculator tools use calculation = none, arg1 = null, arg2 = null.
 Return structured data only.
 
 User question:
-""" + state["question"]
+""" + question
 
     client = None
-
     try:
-
         client = genai.Client(api_key=API_KEY)
-
         response = client.models.generate_content(
             model=MODEL_NAME,
             contents=instruction,
@@ -253,346 +184,170 @@ User question:
                 temperature=0,
             ),
         )
-
         if response.parsed is not None:
-
-            decision = AgentDecision.model_validate(
-                response.parsed
-            )
-
+            decision = AgentDecision.model_validate(response.parsed)
         else:
-
-            decision = AgentDecision.model_validate_json(
-                response.text
-            )
-
+            decision = AgentDecision.model_validate_json(response.text)
         return {
             "selected_tool": decision.tool.value,
             "calculation": decision.calculation.value,
             "arg1": decision.arg1,
             "arg2": decision.arg2,
         }
-
     except Exception as error:
-
         return {
             "selected_tool": "unsupported",
             "answer": (
-                "The AI router is temporarily "
-                "unavailable. Try again later. "
+                "The AI router is temporarily unavailable. Try again later. "
                 f"Technical details: {error}"
             ),
         }
-
     finally:
-
         if client is not None:
             client.close()
 
 
-# ==========================================
-# STEP 5: Validate extracted values
-# ==========================================
-
-def numbers_in_question(question):
-    """Extract signed numbers exactly as supplied in the question."""
-
-    pattern = (
-        r"(?<![A-Za-z0-9_.])"
-        r"[-+]?\d+(?:,\d{3})*(?:\.\d+)?"
-        r"(?![A-Za-z0-9_.])"
-    )
-
+def numbers_in_question(question: str) -> set[Decimal]:
+    """Collect numeric values explicitly present in the question."""
+    pattern = r"(?<![A-Za-z0-9_.])[-+]?\d+(?:,\d{3})*(?:\.\d+)?(?![A-Za-z0-9_.])"
     values = set()
-
     for text in re.findall(pattern, question):
         try:
             number = Decimal(text.replace(",", ""))
             if number.is_finite():
                 values.add(number)
         except InvalidOperation:
-            continue
-
+            pass
     return values
 
 
-def verified_argument(value, question):
-
+def verified_argument(value, question: str) -> str | None:
+    """Reject inputs invented by the language model."""
     if value is None:
         return None
-
     try:
-
-        number = Decimal(
-            str(value).replace(",", "").strip()
-        )
-
-    except (InvalidOperation, ValueError):
+        number = Decimal(str(value).replace(",", "").strip())
+    except (InvalidOperation, ValueError, TypeError):
         return None
-
-    if not number.is_finite():
+    if not number.is_finite() or number not in numbers_in_question(question):
         return None
-
-    # Prevent use of numbers that were not
-    # explicitly provided in the question.
-
-    if number not in numbers_in_question(question):
-        return None
-
     return str(number)
 
 
-# ==========================================
-# STEP 6: Calculator node
-# ==========================================
-
-def calculator_node(state: AgentState):
-
+def calculator_node(state: AgentState) -> dict:
     question = state["question"]
-    operation = state["calculation"]
+    operation = state.get("calculation", "none")
+    arg1 = verified_argument(state.get("arg1"), question)
+    arg2 = verified_argument(state.get("arg2"), question)
 
-    arg1 = verified_argument(
-        state["arg1"],
-        question
-    )
-
-    arg2 = verified_argument(
-        state["arg2"],
-        question
-    )
-
-    if operation == "area_conversion":
-        required_inputs = 1
-
-    else:
-        required_inputs = 2
-
-    missing = (
-        arg1 is None
-        or (
-            required_inputs == 2
-            and arg2 is None
-        )
-    )
-
-    if missing:
-
+    if arg1 is None or (operation != "area_conversion" and arg2 is None):
         return {
             "answer": (
-                "I need the required numerical "
-                "inputs and their units to perform "
-                "this calculation. Please provide "
-                "them explicitly."
+                "I need the required numerical inputs and their units to perform "
+                "this calculation. Please provide them explicitly."
             ),
             "sources": [],
             "supported": False,
         }
 
     try:
-
-        # --------------------------------------
-        # Fertilizer quantity
-        # --------------------------------------
-
         if operation == "fertilizer_quantity":
-
-            result = fertilizer_quantity(
-                arg1,
-                arg2
-            )
-
+            result = fertilizer_quantity(arg1, arg2)
             answer = (
-                "Fertilizer required: "
-                f"{result['total_bags']} bags.\n"
-                f"Inputs: {arg1} acres at "
-                f"{arg2} bags per acre."
+                f"Fertilizer required: {result['total_bags']} bags.\n"
+                f"Inputs: {arg1} acres at {arg2} bags per acre."
             )
 
-        # --------------------------------------
-        # Fertilizer cost
-        # --------------------------------------
+        elif operation == "fertilizer_area_cost":
+            area = Decimal(arg1)
+            rate = Decimal(arg2)
+            if area <= 0:
+                raise ValueError("Area must be greater than zero.")
+            if rate < 0:
+                raise ValueError("Cost per acre cannot be negative.")
+            total = area * rate
+            answer = (
+                f"Total fertilizer cost: PKR {total:,.2f}\n"
+                f"Inputs: {area} acres at PKR {rate:,.2f} per acre."
+            )
 
         elif operation == "fertilizer_cost":
-
-            result = fertilizer_cost(
-                arg1,
-                arg2
-            )
-
+            # Only number-of-bags x price-per-bag, not acreage pricing.
+            if re.search(r"\b(?:pkr|rs\.?)\s*(?:/|per)\s*acre\b", question, re.I):
+                raise ValueError("A price per acre cannot be used as a price per bag.")
+            result = fertilizer_cost(arg1, arg2)
             answer = (
-                "Total fertilizer cost: PKR "
-                f"{result['total_cost_pkr']:,.2f}\n"
-                f"Inputs: {arg1} bags at "
-                f"PKR {arg2} per bag."
+                f"Total fertilizer cost: PKR {result['total_cost_pkr']:,.2f}\n"
+                f"Inputs: {arg1} bags at PKR {arg2} per bag."
             )
-
-        # --------------------------------------
-        # Seed requirement
-        # --------------------------------------
 
         elif operation == "seed_requirement":
-
-            result = seed_requirement(
-                arg1,
-                arg2
-            )
-
+            result = seed_requirement(arg1, arg2)
             answer = (
-                "Total seed required: "
-                f"{result['total_seed_kg']} kg.\n"
-                f"Inputs: {arg1} acres at "
-                f"{arg2} kg per acre."
+                f"Total seed required: {result['total_seed_kg']} kg.\n"
+                f"Inputs: {arg1} acres at {arg2} kg per acre."
             )
-
-        # --------------------------------------
-        # Area conversion
-        # --------------------------------------
 
         elif operation == "area_conversion":
-
             result = acres_to_hectares(arg1)
-
-            answer = (
-                f"{arg1} acres = "
-                f"{result['hectares']:.4f} hectares."
-            )
-
-        # --------------------------------------
-        # Irrigation volume
-        # --------------------------------------
+            answer = f"{arg1} acres = {result['hectares']:.4f} hectares."
 
         elif operation == "irrigation_volume":
-
-            result = irrigation_volume(
-                arg1,
-                arg2
-            )
-
+            result = irrigation_volume(arg1, arg2)
             answer = (
-                "Theoretical irrigation volume: "
-                f"{result['volume_m3']:.2f} m³.\n"
-                f"Inputs: {arg1} acres with "
-                f"{arg2} mm applied depth.\n"
+                f"Theoretical irrigation volume: {result['volume_m3']:.2f} m³.\n"
+                f"Inputs: {arg1} acres with {arg2} mm applied depth.\n"
                 "Excludes irrigation losses."
             )
 
-        # --------------------------------------
-        # NEW: Crop production
-        # --------------------------------------
-
         elif operation == "yield_production":
-
-            area_acres = Decimal(arg1)
-            yield_kg_per_acre = Decimal(arg2)
-
-            if area_acres <= 0:
-
-                raise ValueError(
-                    "Area must be positive."
-                )
-
-            if yield_kg_per_acre < 0:
-
-                raise ValueError(
-                    "Yield rate cannot be negative."
-                )
-
-            total_kg = (
-                area_acres * yield_kg_per_acre
-            )
-
+            area = Decimal(arg1)
+            rate = Decimal(arg2)
+            if area <= 0:
+                raise ValueError("Area must be positive.")
+            if rate < 0:
+                raise ValueError("Yield rate cannot be negative.")
+            total_kg = area * rate
             answer = (
-                "Total crop production: "
-                f"{total_kg:,.2f} kg.\n"
-                f"Inputs: {arg1} acres at "
-                f"{arg2} kg per acre."
+                f"Total crop production: {total_kg:,.2f} kg.\n"
+                f"Inputs: {arg1} acres at {arg2} kg per acre."
             )
-
-        # --------------------------------------
-        # Unsupported calculation
-        # --------------------------------------
 
         else:
-
             return {
-                "answer": (
-                    "This calculation is not "
-                    "supported yet."
-                ),
+                "answer": "This calculation is not supported yet.",
                 "sources": [],
                 "supported": False,
             }
 
-        return {
-            "answer": answer,
-            "sources": [],
-            "supported": True,
-        }
+        return {"answer": answer, "sources": [], "supported": True}
 
     except (ValueError, ArithmeticError) as error:
-
         return {
-            "answer": (
-                f"Calculation error: {error}"
-            ),
+            "answer": f"Calculation error: {error}",
             "sources": [],
             "supported": False,
         }
 
 
-# ==========================================
-# STEP 7: Unsupported handler
-# ==========================================
-
-def unsupported_node(state: AgentState):
-
+def unsupported_node(state: AgentState) -> dict:
     return {
-        "answer": (
-            state.get("answer")
-            or "I cannot fulfill this request with "
-               "the currently available tools."
+        "answer": state.get("answer") or (
+            "I cannot fulfill this request with the currently available tools."
         ),
         "sources": [],
         "supported": False,
     }
 
 
-# ==========================================
-# STEP 8: Build LangGraph
-# ==========================================
-
+# The standalone four-route workflow remains available.
 workflow = StateGraph(AgentState)
-
-workflow.add_node(
-    "router",
-    choose_tool
-)
-
-workflow.add_node(
-    "rag",
-    rag_tool
-)
-
-workflow.add_node(
-    "weather",
-    weather_tool
-)
-
-workflow.add_node(
-    "calculator",
-    calculator_node
-)
-
-workflow.add_node(
-    "unsupported",
-    unsupported_node
-)
-
-workflow.add_edge(
-    START,
-    "router"
-)
-
+workflow.add_node("router", choose_tool)
+workflow.add_node("rag", rag_tool)
+workflow.add_node("weather", weather_tool)
+workflow.add_node("calculator", calculator_node)
+workflow.add_node("unsupported", unsupported_node)
+workflow.add_edge(START, "router")
 workflow.add_conditional_edges(
     "router",
     lambda state: state["selected_tool"],
@@ -603,59 +358,26 @@ workflow.add_conditional_edges(
         "unsupported": "unsupported",
     },
 )
-
-for node in [
-    "rag",
-    "weather",
-    "calculator",
-    "unsupported",
-]:
-
-    workflow.add_edge(
-        node,
-        END
-    )
-
+for node in ("rag", "weather", "calculator", "unsupported"):
+    workflow.add_edge(node, END)
 app = workflow.compile()
 
 
-# ==========================================
-# STEP 9: Interactive application
-# ==========================================
-
-def main():
-
+def main() -> None:
     print("=" * 55)
-
-    print(
-        "AGRIASSIST-RX: FOUR-TOOL LANGGRAPH AGENT"
-    )
-
+    print("AGRIASSIST-RX: FOUR-TOOL LANGGRAPH AGENT")
     print("=" * 55)
-
     print("\nType 'exit' to stop.\n")
 
     try:
-
         while True:
-
-            question = input(
-                "Your question: "
-            ).strip()
-
-            if question.lower() in (
-                "exit",
-                "quit"
-            ):
-
+            question = input("Your question: ").strip()
+            if question.lower() in ("exit", "quit"):
                 print("\nGoodbye!")
                 break
-
             if not question:
                 continue
-
             try:
-
                 result = app.invoke({
                     "question": question,
                     "selected_tool": "",
@@ -666,50 +388,24 @@ def main():
                     "sources": [],
                     "supported": False,
                 })
-
                 print("\n" + "-" * 55)
-
-                print(
-                    "Selected tool:",
-                    result["selected_tool"]
-                )
-
+                print("Selected tool:", result["selected_tool"])
                 print("-" * 55)
-
                 print("\nAGRIASSIST-RX ANSWER:")
                 print(result["answer"])
-
-                if result["sources"]:
-
+                if result.get("sources"):
                     print("\nEVIDENCE SOURCES:")
-
                     for source in result["sources"]:
-
                         print(
-                            f"[{source['id']}] "
-                            f"{source['source']} "
+                            f"[{source['id']}] {source['source']} "
                             f"(PDF page {source['page']})"
                         )
-
-                print(
-                    "\n" + "-" * 55 + "\n"
-                )
-
+                print("\n" + "-" * 55 + "\n")
             except Exception as error:
-
-                print(
-                    "\nUnable to process request."
-                )
-
-                print(
-                    "Error:",
-                    error
-                )
-
+                print("\nUnable to process request.")
+                print("Error:", error)
     finally:
-
         if "rag" in sys.modules:
-
             from rag import client
             client.close()
 
