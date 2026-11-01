@@ -1,0 +1,32 @@
+{
+  "timestamp_utc": "2026-10-31T22:44:52.544125+00:00",
+  "test_type": "RAG output and citation collection",
+  "total_cases": 1,
+  "generated": 1,
+  "errors": 0,
+  "note": "Generated outputs are NOT automatically graded as correct. Manual verification against source PDFs is required.",
+  "results": [
+    {
+      "id": "Q03",
+      "question": "How does wheat stripe rust spread?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Wheat stripe rust spreads primarily through wind dispersal. Thousands of urediniospores are produced from infected wheat plant tissues and can be carried by wind to healthy plants, where they initiate new infections. The pathogen survives between seasons on volunteer wheat plants or as latent infections in dormant wheat plantings, and its spread is favored by mild winters and cool, moist weather conditions.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    }
+  ]
+}

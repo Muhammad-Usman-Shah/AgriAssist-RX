@@ -1,0 +1,36 @@
+{
+  "project": "AgriAssist-RX",
+  "evaluation": "30 unseen RAG questions",
+  "timestamp_utc": "2026-10-31T23:07:40.327542+00:00",
+  "batch_start": 1,
+  "batch_size": 1,
+  "total_generated": 1,
+  "total_errors": 0,
+  "note": "This report collects responses only. Factual correctness, answer completeness, and citation faithfulness require manual source verification.",
+  "results": [
+    {
+      "id": "U02",
+      "category": "factual",
+      "question": "What color are the lesions produced by wheat stripe rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "The lesions produced by wheat stripe rust are yellow-orange in color.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    }
+  ]
+}

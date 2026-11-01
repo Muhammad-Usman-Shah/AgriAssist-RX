@@ -1,0 +1,199 @@
+
+{
+  "project": "AgriAssist-RX",
+  "phase": "Phase 6 - RAG Quality Evaluation",
+  "evaluation_type": "Manual PDF Evidence Review",
+  "total_unique_questions": 10,
+  "baseline_knowledge_chunks": 33,
+  "updated_knowledge_chunks": 38,
+  "baseline_evaluation": {
+    "total_questions": 10,
+    "behavior_matches_original_expectation": 9,
+    "substantive_answers": 6,
+    "verified_substantive_answers": 6,
+    "expected_refusals": 3,
+    "correct_expected_refusals": 3,
+    "additional_refusals": 1,
+    "api_errors": 0
+  },
+  "q03_retest": {
+    "total_questions": 1,
+    "questions_answered": 1,
+    "verified_correct_answers": 1,
+    "api_errors": 0
+  },
+  "results": [
+    {
+      "id": "Q01",
+      "question": "What are the symptoms of wheat stem rust?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "adequate",
+      "evidence": [
+        "Stem_Rust_Man_National.pdf, page 5"
+      ],
+      "review_notes": "The answer correctly describes affected plant parts, elongated lesions, orange-red spores, tissue tearing, and possible lodging."
+    },
+    {
+      "id": "Q02",
+      "question": "What causes wheat leaf rust?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "brief but adequate",
+      "evidence": [
+        "Rust_Diseases_National.pdf, page 1"
+      ],
+      "review_notes": "The answer correctly identifies a fungus as the cause of wheat leaf rust. It is factually supported but brief."
+    },
+    {
+      "id": "Q03",
+      "question": "How does wheat stripe rust spread?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": false,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": "no substantive answer",
+      "evidence": [],
+      "review_notes": "The system refused because sufficiently specific supporting information was unavailable in the original three PDFs. This was a defensible refusal but did not match the original expectation to provide an answer."
+    },
+    {
+      "id": "Q04",
+      "question": "Which parts of wheat plants can stem rust infect?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "adequate",
+      "evidence": [
+        "Stem_Rust_Man_National.pdf, pages 4-5"
+      ],
+      "review_notes": "The answer correctly identifies the stems, leaves, leaf sheaths, and heads as potentially affected plant parts."
+    },
+    {
+      "id": "Q05",
+      "question": "What symptoms distinguish stem rust from leaf rust?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "adequate",
+      "evidence": [
+        "Stem_Rust_Man_National.pdf, pages 4-5",
+        "Rust_Diseases_National.pdf, page 3"
+      ],
+      "review_notes": "The answer correctly compares infected plant parts, lesion size, lesion shape, and tearing of plant tissue."
+    },
+    {
+      "id": "Q06",
+      "question": "How can wheat rust affect crop growth and yield?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "adequate",
+      "evidence": [
+        "Stem_Rust_Man_National.pdf, pages 1 and 5",
+        "Rust_Diseases_National.pdf, page 1"
+      ],
+      "review_notes": "The answer correctly describes reductions in grain production, the importance of infection timing, and lodging associated with severe stem rust."
+    },
+    {
+      "id": "Q07",
+      "question": "What environmental conditions encourage wheat rust?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "partial",
+      "evidence": [
+        "Stem_Rust_Man_National.pdf, pages 1 and 3"
+      ],
+      "review_notes": "The answer correctly discusses weather systems and reduced disease risk in drier climates. However, it does not clearly explain the specific temperature and moisture conditions that favor wheat rust."
+    },
+    {
+      "id": "Q08",
+      "question": "What is the current market price of wheat in Lahore?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": "appropriate refusal",
+      "evidence": [],
+      "review_notes": "The system correctly refused because current wheat market prices are not available in the agricultural knowledge documents."
+    },
+    {
+      "id": "Q09",
+      "question": "What is the latest cotton market price today?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": "appropriate refusal",
+      "evidence": [],
+      "review_notes": "The system correctly refused because the available PDFs contain no live cotton market price information."
+    },
+    {
+      "id": "Q10",
+      "question": "What was the exact wheat yield on my farm yesterday?",
+      "evaluation_stage": "baseline",
+      "behavior_correct": true,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": "appropriate refusal",
+      "evidence": [],
+      "review_notes": "The system correctly refused because no farm-specific yield records were available."
+    },
+    {
+      "id": "Q03_RETEST",
+      "question": "How does wheat stripe rust spread?",
+      "evaluation_stage": "after_knowledge_base_expansion",
+      "knowledge_chunks": 38,
+      "behavior_correct": true,
+      "answer_correct": true,
+      "citation_verified": true,
+      "faithful_to_sources": true,
+      "completeness": "adequate",
+      "evidence": [
+        "Wheat_Stripe_Rust_USU.pdf, page 2"
+      ],
+      "review_notes": "The original Q03 test resulted in a refusal with 33 knowledge chunks. After adding the Utah State University stripe rust document, the knowledge base increased to 38 chunks. Hybrid retrieval ranked the new source first. The RAG system then generated an answer explaining wind dispersal, urediniospore production, infection of healthy plants, survival between seasons, and favorable weather conditions. The answer was verified against the cited document."
+    }
+  ],
+  "knowledge_base_improvement": {
+    "original_documents": 3,
+    "updated_documents": 4,
+    "original_chunks": 33,
+    "updated_chunks": 38,
+    "new_document": "Wheat_Stripe_Rust_USU.pdf",
+    "target_question": "Q03",
+    "original_behavior": "refused",
+    "updated_behavior": "answered_with_evidence",
+    "hybrid_retrieval_rank_before": null,
+    "hybrid_retrieval_rank_after": 1,
+    "improvement_verified": true,
+    "interpretation": "Adding targeted technical source material improved retrieval relevance and enabled an evidence-supported response to a previously unanswered question."
+  },
+  "limitations": [
+    "The initial evaluation contains only 10 unique questions.",
+    "The evaluation was conducted using a small, wheat-rust-focused document collection.",
+    "Manual factual and citation verification was performed on the available source documents.",
+    "Q07 remains incomplete despite its factually supported claims.",
+    "The Q03 improvement was demonstrated on one targeted question.",
+    "The results do not establish overall RAG accuracy or generalization to unseen agricultural topics.",
+    "A larger independently reviewed evaluation dataset is required before making broader performance claims."
+  ]
+}

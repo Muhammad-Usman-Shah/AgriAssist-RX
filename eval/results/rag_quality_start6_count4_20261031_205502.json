@@ -1,0 +1,83 @@
+{
+  "timestamp_utc": "2026-10-31T20:55:02.506676+00:00",
+  "test_type": "RAG output and citation collection",
+  "total_cases": 4,
+  "generated": 4,
+  "errors": 0,
+  "note": "Generated outputs are NOT automatically graded as correct. Manual verification against source PDFs is required.",
+  "results": [
+    {
+      "id": "Q07",
+      "question": "What environmental conditions encourage wheat rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "The development of wheat rust is influenced by weather conditions. According to the provided evidence, drier climates may reduce the risk of stem rust disease development, while the movement of the disease is facilitated by weather systems that transport rust fungi across regions.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        },
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 3,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p3_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q08",
+      "question": "What is the current market price of wheat in Lahore?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q09",
+      "question": "What is the latest cotton market price today?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q10",
+      "question": "What was the exact wheat yield on my farm yesterday?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    }
+  ]
+}

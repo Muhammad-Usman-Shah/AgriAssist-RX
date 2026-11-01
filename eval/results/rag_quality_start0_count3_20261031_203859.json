@@ -1,0 +1,69 @@
+{
+  "timestamp_utc": "2026-10-31T20:38:59.545392+00:00",
+  "test_type": "RAG output and citation collection",
+  "total_cases": 3,
+  "generated": 3,
+  "errors": 0,
+  "note": "Generated outputs are NOT automatically graded as correct. Manual verification against source PDFs is required.",
+  "results": [
+    {
+      "id": "Q01",
+      "question": "What are the symptoms of wheat stem rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stem rust in wheat is characterized by its ability to infect the stems, leaves, and leaf sheaths of the plant, which distinguishes it from other rust diseases that typically do not infect the stem. The disease manifests as elongated or oval-shaped blister-like lesions. As the fungus develops, orange-red spores burst through the plant's outer tissue, giving the margins of the lesions a tattered or torn appearance that is visible without magnification. In severe cases, the plant may experience lodging.",
+      "sources": [
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q02",
+      "question": "What causes wheat leaf rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Wheat leaf rust is a disease caused by a fungus.",
+      "sources": [
+        {
+          "id": 4,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q03",
+      "question": "How does wheat stripe rust spread?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    }
+  ]
+}

@@ -1,0 +1,148 @@
+{
+  "project": "AgriAssist-RX",
+  "evaluation": "30 unseen RAG questions",
+  "timestamp_utc": "2026-10-31T23:23:11.726789+00:00",
+  "batch_start": 15,
+  "batch_size": 5,
+  "total_generated": 5,
+  "total_errors": 0,
+  "note": "This report collects responses only. Factual correctness, answer completeness, and citation faithfulness require manual source verification.",
+  "results": [
+    {
+      "id": "U16",
+      "category": "factual",
+      "question": "What role can field surveys play in a wheat rust early-warning system?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Field surveys serve as a critical component of wheat rust early-warning systems by providing essential disease data. This information, along with data from trap nurseries, wheat crop distribution patterns, and meteorological data, is incorporated into GIS-based systems to predict disease occurrence and risk. Furthermore, field survey data is used to inform alert bulletins and identify community vulnerability and socioeconomic impacts, ultimately supporting decision-making for preventative actions and control operations.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 4,
+          "chunk_id": "wheat_rust.pdf.pdf_p4_c1"
+        },
+        {
+          "id": 3,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 5,
+          "chunk_id": "wheat_rust.pdf.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U17",
+      "category": "factual",
+      "question": "How can weather systems influence the movement of wheat rust fungi?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Weather systems play a key role in the long-distance movement of wheat rust fungi, specifically by transporting the disease northward from overwintering locations in the southern United States and Mexico into other regions. Additionally, wind serves as a primary mechanism for the dispersal of rust urediniospores, allowing them to spread rapidly to other plants and fields to initiate new infections.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 4,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U18",
+      "category": "factual",
+      "question": "What plant characteristics help distinguish stem rust from stripe rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "To distinguish stem rust from stripe rust, examine the affected plant parts and the characteristics of the lesions. Stripe rust primarily affects leaf blades and forms small, round, blister-like lesions organized into distinct stripes; infection of the stems is rare. In contrast, stem rust is capable of infecting nearly all aboveground parts, including the stems, leaves, and leaf sheaths. Stem rust lesions are oval or elongated in shape, and the fungus bursts through the outer plant layers, causing a visible tearing of the tissue that results in a tattered appearance at the margins.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 4,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 1,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U19",
+      "category": "coverage_boundary",
+      "question": "What exact temperature is best for every type of wheat rust?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U20",
+      "category": "coverage_boundary",
+      "question": "Which wheat variety guarantees complete protection against all rust strains?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    }
+  ]
+}

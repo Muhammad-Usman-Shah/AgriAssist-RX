@@ -119,7 +119,7 @@ def choose_tool(state: AgentState):
     question = state["question"]
     q = question.lower()
 
-    numeric = r"(\d+(?:,\d{3})*(?:\.\d+)?)"
+    numeric = r"(?<![A-Za-z0-9_.])([-+]?\d+(?:,\d{3})*(?:\.\d+)?)"
 
     rate_match = re.search(
         numeric
@@ -295,23 +295,21 @@ User question:
 # ==========================================
 
 def numbers_in_question(question):
+    """Extract signed numbers exactly as supplied in the question."""
 
     pattern = (
-        r"(?<![A-Za-z0-9])"
-        r"\d+(?:,\d{3})*(?:\.\d+)?"
-        r"(?![A-Za-z0-9])"
+        r"(?<![A-Za-z0-9_.])"
+        r"[-+]?\d+(?:,\d{3})*(?:\.\d+)?"
+        r"(?![A-Za-z0-9_.])"
     )
 
     values = set()
 
     for text in re.findall(pattern, question):
-
         try:
-
-            values.add(
-                Decimal(text.replace(",", ""))
-            )
-
+            number = Decimal(text.replace(",", ""))
+            if number.is_finite():
+                values.add(number)
         except InvalidOperation:
             continue
 

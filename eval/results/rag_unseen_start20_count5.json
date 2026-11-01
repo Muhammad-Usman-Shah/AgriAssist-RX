@@ -1,0 +1,143 @@
+{
+  "project": "AgriAssist-RX",
+  "evaluation": "30 unseen RAG questions",
+  "timestamp_utc": "2026-10-31T23:28:21.483107+00:00",
+  "batch_start": 20,
+  "batch_size": 5,
+  "total_generated": 5,
+  "total_errors": 0,
+  "note": "This report collects responses only. Factual correctness, answer completeness, and citation faithfulness require manual source verification.",
+  "results": [
+    {
+      "id": "U21",
+      "category": "coverage_boundary",
+      "question": "Can stripe rust and leaf rust infect the same field at the same time?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Yes, stripe rust and leaf rust can both occur on wheat, and the provided documents indicate that fungicides used in North America for managing stem rust generally also provide control for leaf rust and stripe rust, implying that these diseases are recognized within the same context of disease management.",
+      "sources": [
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 6,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p6_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U22",
+      "category": "coverage_boundary",
+      "question": "How many days after infection do stripe rust symptoms first become visible?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Symptoms of stripe rust on susceptible wheat cultivars typically become visible approximately one week after the initial infection occurs.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U23",
+      "category": "coverage_boundary",
+      "question": "Does wheat stripe rust always cause more yield loss than stem rust?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "No, wheat stripe rust does not always cause more yield loss than stem rust. While the potential yield loss from rust diseases depends on factors such as host susceptibility, weather conditions, and the timing of the outbreak relative to the crop growth stage, stem rust is generally considered the most damaging of the cereal rust diseases because it can infect the leaves, stems, and heads of developing plants, and can predispose them to lodging.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U24",
+      "category": "coverage_boundary",
+      "question": "Can wheat rust be diagnosed with complete certainty from leaf color alone?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "No, wheat rust cannot be diagnosed with complete certainty from leaf color alone. While lesion color is a characteristic used to help distinguish between wheat rust diseases, it is only one of several factors that must be considered. Accurate identification requires examining multiple features, including which parts of the plant are infected, the shape and size of the lesions, and the distribution pattern of the lesions on the plant. Furthermore, symptom expression can be modified by the specific variety of wheat or barley being infected, which may result in reduced lesion size and variations in surrounding tissue color.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 4,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 4,
+          "chunk_id": "Rust_Diseases_National.pdf_p4_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U25",
+      "category": "refusal",
+      "question": "What is the live wheat price in Multan right now?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    }
+  ]
+}

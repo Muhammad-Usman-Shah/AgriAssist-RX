@@ -1,0 +1,106 @@
+{
+  "timestamp_utc": "2026-10-31T20:50:43.051412+00:00",
+  "test_type": "RAG output and citation collection",
+  "total_cases": 3,
+  "generated": 3,
+  "errors": 0,
+  "note": "Generated outputs are NOT automatically graded as correct. Manual verification against source PDFs is required.",
+  "results": [
+    {
+      "id": "Q04",
+      "question": "Which parts of wheat plants can stem rust infect?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stem rust is capable of infecting the leaves, leaf sheaths, stems, and heads of wheat plants.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q05",
+      "question": "What symptoms distinguish stem rust from leaf rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stem rust and leaf rust can be distinguished by the parts of the plant they infect and the physical appearance of their lesions. Stem rust is capable of infecting stems, leaves, and leaf sheaths, whereas leaf rust can infect the leaf sheath but does not infect the stem. Regarding lesion characteristics, stem rust lesions are typically oval-shaped or elongated, larger, and cause noticeable tearing of the plant's outer tissue. In contrast, leaf rust lesions are generally smaller, more round, and result in less tearing of the outer plant tissue.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 4,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p4_c1"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    },
+    {
+      "id": "Q06",
+      "question": "How can wheat rust affect crop growth and yield?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Wheat rust diseases, including stem, leaf, and stripe rust, reduce grain production by impacting wheat and barley. Stem rust specifically can infect the leaves, stems, and heads of plants. The most significant yield losses occur when plants are infected early in their growth and development, particularly before the heading stage. Severe stem rust infections can also cause plants to lodge, which makes harvesting more difficult and further contributes to yield losses. The impact on yield is highly dependent on the timing and severity of the outbreak relative to the crop's development stage.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "review_notes": ""
+    }
+  ]
+}

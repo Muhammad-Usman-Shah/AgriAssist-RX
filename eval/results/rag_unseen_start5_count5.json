@@ -1,0 +1,162 @@
+{
+  "project": "AgriAssist-RX",
+  "evaluation": "30 unseen RAG questions",
+  "timestamp_utc": "2026-10-31T23:13:21.370688+00:00",
+  "batch_start": 5,
+  "batch_size": 5,
+  "total_generated": 5,
+  "total_errors": 0,
+  "note": "This report collects responses only. Factual correctness, answer completeness, and citation faithfulness require manual source verification.",
+  "results": [
+    {
+      "id": "U06",
+      "category": "factual",
+      "question": "What is Ug99 and why is it important in wheat production?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Ug99 is a specific race of the stem rust fungus, first detected in Uganda, Kenya, and Ethiopia, that is significant because it can overcome certain genetic resistance genes (such as Sr31) in wheat varieties. Its emergence is important to wheat production because it threatens to cause severe yield losses by bypassing the genetic resistance that has historically controlled stem rust. Additional races that have evolved since the discovery of Ug99 are also capable of overcoming other resistance genes, such as Sr24 and Sr36, which complicates efforts to contain the disease and poses a potential threat to wheat and barley production in North America.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        },
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c2"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U07",
+      "category": "factual",
+      "question": "Why can early stem rust infection cause serious grain losses?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Early stem rust infection leads to significant grain losses because it allows the disease to reach severe levels during the critical early stages of grain development. Furthermore, plants severely damaged by the disease are more prone to lodging, which not only directly reduces yield but also complicates the grain harvesting process.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U08",
+      "category": "factual",
+      "question": "How does lodging affect the harvesting of wheat infected with stem rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "When wheat plants are severely damaged by stem rust, they become predisposed to lodging. This lodging complicates the grain harvesting process and results in further increases in yield losses.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U09",
+      "category": "comparison",
+      "question": "Compare the lesion colors of stem rust and leaf rust.",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "The lesion color for stem rust is orange-red, while the lesion color for leaf rust is brown.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 2,
+          "chunk_id": "Rust_Diseases_National.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U10",
+      "category": "comparison",
+      "question": "How can the arrangement of pustules help identify stripe rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stripe rust is uniquely identified by the arrangement of its blister-like lesions, or uredinia, which develop in linear rows or stripes along the axis of the infected leaf. While other rust diseases typically feature scattered lesions, stripe rust lesions merge and organize into these distinct longitudinal stripes on the plant tissue.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 3,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 1,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "project": "AgriAssist-RX",
+  "evaluation": "30 unseen RAG questions",
+  "timestamp_utc": "2026-10-31T23:02:43.282722+00:00",
+  "batch_start": 0,
+  "batch_size": 5,
+  "total_generated": 4,
+  "total_errors": 1,
+  "note": "This report collects responses only. Factual correctness, answer completeness, and citation faithfulness require manual source verification.",
+  "results": [
+    {
+      "id": "U01",
+      "category": "factual",
+      "question": "Which wheat tissues usually develop leaf rust pustules?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Leaf rust primarily develops its pustules on the leaf blades of wheat plants. It can also commonly infect the leaf sheaths, while infections on the stems and heads are rare.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 2,
+          "chunk_id": "Rust_Diseases_National.pdf_p2_c1"
+        },
+        {
+          "id": 5,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U02",
+      "category": "factual",
+      "question": "What color are the lesions produced by wheat stripe rust?",
+      "expected_behavior": "supported",
+      "status": "ERROR",
+      "supported": null,
+      "answer": "",
+      "sources": [],
+      "error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U03",
+      "category": "factual",
+      "question": "How are stripe rust pustules arranged on wheat leaves?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stripe rust pustules, or uredinia, are arranged in linear, stripe-like rows along the axis of the wheat leaf. These lesions originate from small, round, blister-like pustules that merge to form these characteristic stripes.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 1,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p1_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 5,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U04",
+      "category": "factual",
+      "question": "Why is early detection important for controlling cereal rust diseases?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Early detection of cereal rust diseases is critical for effective in-season management and future variety selection. Because rust diseases can increase rapidly, detecting them early allows growers to apply fungicides when appropriate. Specifically for stem rust, early diagnosis can provide time for farmers to respond to emerging threats. Additionally, scouting and early detection are essential for properly timing fungicide applications to control stripe rust effectively. Timely identification is also important because the greatest yield losses typically occur when infections develop before the heading stage of plant development.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        },
+        {
+          "id": 5,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    },
+    {
+      "id": "U05",
+      "category": "factual",
+      "question": "What happens when a rust fungus overcomes a wheat variety's resistance genes?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "When a rust fungus evolves to overcome a wheat variety's specific resistance genes, all wheat varieties protected by that particular gene will likely experience significant reductions in their resistance, potentially leading to widespread disease outbreaks. The fungus is able to do this because its populations can undergo genetic changes that allow it to adapt to current plant resistance. These new races can then reproduce rapidly and spread via wind, threatening wheat and barley production over large geographical regions.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c1"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 5,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": ""
+    }
+  ]
+}

@@ -1,0 +1,889 @@
+{
+  "project": "AgriAssist-RX",
+  "evaluation": "30-question unseen RAG pilot",
+  "knowledge_chunks": 38,
+  "unique_questions": 30,
+  "first_attempt_generated": 29,
+  "first_attempt_errors": 1,
+  "completed_after_retry": 30,
+  "manual_review_counts": {
+    "pass": 28,
+    "partial": 1,
+    "grounding_failure": 1
+  },
+  "note": "Manual judgments were assigned during the question-by-question review. Results are limited to this curated test set and four source PDFs.",
+  "results": [
+    {
+      "id": "U01",
+      "category": "factual",
+      "question": "Which wheat tissues usually develop leaf rust pustules?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Leaf rust primarily develops its pustules on the leaf blades of wheat plants. It can also commonly infect the leaf sheaths, while infections on the stems and heads are rare.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 2,
+          "chunk_id": "Rust_Diseases_National.pdf_p2_c1"
+        },
+        {
+          "id": 5,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U02",
+      "category": "factual",
+      "question": "What color are the lesions produced by wheat stripe rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "The lesions produced by wheat stripe rust are yellow-orange in color.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "initial_attempt": {
+        "status": "ERROR",
+        "error": "ServerError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}"
+      },
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U03",
+      "category": "factual",
+      "question": "How are stripe rust pustules arranged on wheat leaves?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stripe rust pustules, or uredinia, are arranged in linear, stripe-like rows along the axis of the wheat leaf. These lesions originate from small, round, blister-like pustules that merge to form these characteristic stripes.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 1,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p1_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 5,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U04",
+      "category": "factual",
+      "question": "Why is early detection important for controlling cereal rust diseases?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Early detection of cereal rust diseases is critical for effective in-season management and future variety selection. Because rust diseases can increase rapidly, detecting them early allows growers to apply fungicides when appropriate. Specifically for stem rust, early diagnosis can provide time for farmers to respond to emerging threats. Additionally, scouting and early detection are essential for properly timing fungicide applications to control stripe rust effectively. Timely identification is also important because the greatest yield losses typically occur when infections develop before the heading stage of plant development.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 4,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        },
+        {
+          "id": 5,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U05",
+      "category": "factual",
+      "question": "What happens when a rust fungus overcomes a wheat variety's resistance genes?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "When a rust fungus evolves to overcome a wheat variety's specific resistance genes, all wheat varieties protected by that particular gene will likely experience significant reductions in their resistance, potentially leading to widespread disease outbreaks. The fungus is able to do this because its populations can undergo genetic changes that allow it to adapt to current plant resistance. These new races can then reproduce rapidly and spread via wind, threatening wheat and barley production over large geographical regions.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c1"
+        },
+        {
+          "id": 3,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 5,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U06",
+      "category": "factual",
+      "question": "What is Ug99 and why is it important in wheat production?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Ug99 is a specific race of the stem rust fungus, first detected in Uganda, Kenya, and Ethiopia, that is significant because it can overcome certain genetic resistance genes (such as Sr31) in wheat varieties. Its emergence is important to wheat production because it threatens to cause severe yield losses by bypassing the genetic resistance that has historically controlled stem rust. Additional races that have evolved since the discovery of Ug99 are also capable of overcoming other resistance genes, such as Sr24 and Sr36, which complicates efforts to contain the disease and poses a potential threat to wheat and barley production in North America.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        },
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c2"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U07",
+      "category": "factual",
+      "question": "Why can early stem rust infection cause serious grain losses?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Early stem rust infection leads to significant grain losses because it allows the disease to reach severe levels during the critical early stages of grain development. Furthermore, plants severely damaged by the disease are more prone to lodging, which not only directly reduces yield but also complicates the grain harvesting process.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U08",
+      "category": "factual",
+      "question": "How does lodging affect the harvesting of wheat infected with stem rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "When wheat plants are severely damaged by stem rust, they become predisposed to lodging. This lodging complicates the grain harvesting process and results in further increases in yield losses.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c2"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U09",
+      "category": "comparison",
+      "question": "Compare the lesion colors of stem rust and leaf rust.",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "The lesion color for stem rust is orange-red, while the lesion color for leaf rust is brown.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 2,
+          "chunk_id": "Rust_Diseases_National.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U10",
+      "category": "comparison",
+      "question": "How can the arrangement of pustules help identify stripe rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Stripe rust is uniquely identified by the arrangement of its blister-like lesions, or uredinia, which develop in linear rows or stripes along the axis of the infected leaf. While other rust diseases typically feature scattered lesions, stripe rust lesions merge and organize into these distinct longitudinal stripes on the plant tissue.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 3,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 1,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U11",
+      "category": "factual",
+      "question": "Why might planting wheat varieties with different resistance genes reduce disease risk?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Planting wheat varieties with different sources of resistance genes helps mitigate the risk of disease because it reduces the likelihood that a single race of stem rust will successfully infect and affect all varieties across a farm. If a new race of fungus emerges that overcomes a specific resistance gene, only those varieties relying on that gene will be susceptible, while varieties with different resistance genes may remain unaffected.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c2"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 2,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U12",
+      "category": "factual",
+      "question": "Why does the timing of fungicide application matter for stem rust control?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "In North America, the timing of fungicide application is critical for stem rust control because it is necessary to protect the upper portions of the crop canopy, which provide the resources required for grain development. Fungicide applications are most effective when performed between flag leaf emergence and flowering. Furthermore, because these fungicides are locally systemic and do not move within the plant, proper timing ensures that the necessary plant tissues are protected before infection occurs. Early application is particularly important as the greatest risk of yield loss happens when stem rust becomes established before heading.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 6,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p6_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 8,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p8_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U13",
+      "category": "factual",
+      "question": "How do wheat rust surveillance systems support disease management?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Wheat rust surveillance systems support disease management by providing the foundational data and infrastructure necessary for informed decision-making and the implementation of preventive and control operations. These systems function by harmonizing surveillance methodologies, establishing national and regional teams, and building capacity for field surveys and pathotyping. By integrating national survey data, trap nursery results, meteorological information, and GIS mapping into a centralized early warning system, these programs can track the status of virulent wheat rusts, identify regional distribution, and generate alert bulletins. This information allows for the development of effective contingency plans and supports the timely distribution of resistant varieties to vulnerable areas.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 4,
+          "chunk_id": "wheat_rust.pdf.pdf_p4_c1"
+        },
+        {
+          "id": 2,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 3,
+          "chunk_id": "wheat_rust.pdf.pdf_p3_c1"
+        },
+        {
+          "id": 3,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 15,
+          "chunk_id": "wheat_rust.pdf.pdf_p15_c1"
+        },
+        {
+          "id": 4,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 16,
+          "chunk_id": "wheat_rust.pdf.pdf_p16_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U14",
+      "category": "factual",
+      "question": "What is the purpose of wheat rust trap nurseries?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "The purpose of establishing wheat rust trap nurseries is to facilitate disease surveillance, enable the collection and recording of data on wheat rust, and allow for the analysis of pathogen pathotypes.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 4,
+          "chunk_id": "wheat_rust.pdf.pdf_p4_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U15",
+      "category": "factual",
+      "question": "Why are rust-resistant wheat seeds important for managing epidemics?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Rust-resistant wheat seeds are vital for managing epidemics because they prevent disease outbreaks in wheat-producing countries. Genetic resistance serves as an effective management tool, and the distribution of resistant varieties to farmers is a key strategy for replacing susceptible varieties to mitigate potential yield losses.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 2,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 15,
+          "chunk_id": "wheat_rust.pdf.pdf_p15_c1"
+        },
+        {
+          "id": 4,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 8,
+          "chunk_id": "wheat_rust.pdf.pdf_p8_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Overstates the ability of resistant seeds to prevent disease outbreaks.",
+      "manual_judgment": "partial"
+    },
+    {
+      "id": "U16",
+      "category": "factual",
+      "question": "What role can field surveys play in a wheat rust early-warning system?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Field surveys serve as a critical component of wheat rust early-warning systems by providing essential disease data. This information, along with data from trap nurseries, wheat crop distribution patterns, and meteorological data, is incorporated into GIS-based systems to predict disease occurrence and risk. Furthermore, field survey data is used to inform alert bulletins and identify community vulnerability and socioeconomic impacts, ultimately supporting decision-making for preventative actions and control operations.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 4,
+          "chunk_id": "wheat_rust.pdf.pdf_p4_c1"
+        },
+        {
+          "id": 3,
+          "source": "wheat_rust.pdf.pdf",
+          "page": 5,
+          "chunk_id": "wheat_rust.pdf.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U17",
+      "category": "factual",
+      "question": "How can weather systems influence the movement of wheat rust fungi?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Weather systems play a key role in the long-distance movement of wheat rust fungi, specifically by transporting the disease northward from overwintering locations in the southern United States and Mexico into other regions. Additionally, wind serves as a primary mechanism for the dispersal of rust urediniospores, allowing them to spread rapidly to other plants and fields to initiate new infections.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c2"
+        },
+        {
+          "id": 4,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 1,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U18",
+      "category": "factual",
+      "question": "What plant characteristics help distinguish stem rust from stripe rust?",
+      "expected_behavior": "supported",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "To distinguish stem rust from stripe rust, examine the affected plant parts and the characteristics of the lesions. Stripe rust primarily affects leaf blades and forms small, round, blister-like lesions organized into distinct stripes; infection of the stems is rare. In contrast, stem rust is capable of infecting nearly all aboveground parts, including the stems, leaves, and leaf sheaths. Stem rust lesions are oval or elongated in shape, and the fungus bursts through the outer plant layers, causing a visible tearing of the tissue that results in a tattered appearance at the margins.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 2,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 4,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 1,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p1_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U19",
+      "category": "coverage_boundary",
+      "question": "What exact temperature is best for every type of wheat rust?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U20",
+      "category": "coverage_boundary",
+      "question": "Which wheat variety guarantees complete protection against all rust strains?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U21",
+      "category": "coverage_boundary",
+      "question": "Can stripe rust and leaf rust infect the same field at the same time?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Yes, stripe rust and leaf rust can both occur on wheat, and the provided documents indicate that fungicides used in North America for managing stem rust generally also provide control for leaf rust and stripe rust, implying that these diseases are recognized within the same context of disease management.",
+      "sources": [
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 6,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p6_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "The cited fungicide passage does not directly establish simultaneous infection in one field.",
+      "manual_judgment": "grounding_failure"
+    },
+    {
+      "id": "U22",
+      "category": "coverage_boundary",
+      "question": "How many days after infection do stripe rust symptoms first become visible?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "Symptoms of stripe rust on susceptible wheat cultivars typically become visible approximately one week after the initial infection occurs.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Wheat_Stripe_Rust_USU.pdf",
+          "page": 2,
+          "chunk_id": "Wheat_Stripe_Rust_USU.pdf_p2_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U23",
+      "category": "coverage_boundary",
+      "question": "Does wheat stripe rust always cause more yield loss than stem rust?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "No, wheat stripe rust does not always cause more yield loss than stem rust. While the potential yield loss from rust diseases depends on factors such as host susceptibility, weather conditions, and the timing of the outbreak relative to the crop growth stage, stem rust is generally considered the most damaging of the cereal rust diseases because it can infect the leaves, stems, and heads of developing plants, and can predispose them to lodging.",
+      "sources": [
+        {
+          "id": 2,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 1,
+          "chunk_id": "Rust_Diseases_National.pdf_p1_c1"
+        },
+        {
+          "id": 5,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U24",
+      "category": "coverage_boundary",
+      "question": "Can wheat rust be diagnosed with complete certainty from leaf color alone?",
+      "expected_behavior": "review",
+      "status": "GENERATED",
+      "supported": true,
+      "answer": "No, wheat rust cannot be diagnosed with complete certainty from leaf color alone. While lesion color is a characteristic used to help distinguish between wheat rust diseases, it is only one of several factors that must be considered. Accurate identification requires examining multiple features, including which parts of the plant are infected, the shape and size of the lesions, and the distribution pattern of the lesions on the plant. Furthermore, symptom expression can be modified by the specific variety of wheat or barley being infected, which may result in reduced lesion size and variations in surrounding tissue color.",
+      "sources": [
+        {
+          "id": 1,
+          "source": "Stem_Rust_Man_National.pdf",
+          "page": 5,
+          "chunk_id": "Stem_Rust_Man_National.pdf_p5_c1"
+        },
+        {
+          "id": 3,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 3,
+          "chunk_id": "Rust_Diseases_National.pdf_p3_c1"
+        },
+        {
+          "id": 4,
+          "source": "Rust_Diseases_National.pdf",
+          "page": 4,
+          "chunk_id": "Rust_Diseases_National.pdf_p4_c1"
+        }
+      ],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U25",
+      "category": "refusal",
+      "question": "What is the live wheat price in Multan right now?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U26",
+      "category": "refusal",
+      "question": "How much rain will fall on my farm tomorrow?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U27",
+      "category": "refusal",
+      "question": "What is the exact soil nitrogen level in my field today?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U28",
+      "category": "refusal",
+      "question": "What was my fertilizer purchase cost last month?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U29",
+      "category": "refusal",
+      "question": "What is the current inventory of wheat seeds in my storage room?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    },
+    {
+      "id": "U30",
+      "category": "refusal",
+      "question": "What is the exact disease status of my wheat field without any observations?",
+      "expected_behavior": "refuse",
+      "status": "GENERATED",
+      "supported": false,
+      "answer": "I cannot answer this question reliably from the available agricultural documents.",
+      "sources": [],
+      "error": "",
+      "behavior_correct": null,
+      "answer_correct": null,
+      "citation_verified": null,
+      "faithful_to_sources": null,
+      "completeness": null,
+      "review_notes": "Passed the prior manual source-evidence review.",
+      "manual_judgment": "pass"
+    }
+  ]
+}
