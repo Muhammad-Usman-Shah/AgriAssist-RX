@@ -153,3 +153,26 @@ Key files include:
 - `eval/metrics_results.json`
 - `eval/evaluate_vision_final.py`
 - `eval/vision/mobilenetv3_grouped_test_results.json`
+
+## Fresh Environment Verification — November 2026
+
+AgriAssist-RX was tested in a new Python 3.11.9 virtual environment on Windows.
+
+The environment was created separately from the original development environment. All packages were installed using `requirements.txt`.
+
+The dependency installation completed successfully. The `pip check` command reported no broken requirements, and the main Python libraries imported successfully.
+
+The Streamlit application was started using the new environment on port 8502.
+
+The following features were tested:
+
+| Feature | Result |
+|---|---|
+| Weather information | Passed |
+| Agricultural calculator | Passed |
+| Agricultural RAG | Passed |
+| Wheat image classification | Passed |
+
+The tests confirmed that these tools could run using the newly installed Python packages.
+
+**Limitation:** The test used the existing project folder, agricultural knowledge base, API key, and trained model checkpoint. A completely independent installation from a fresh GitHub clone has not yet been verified. CSV analysis was not retested in this environment.
